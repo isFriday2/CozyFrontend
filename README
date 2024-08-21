@@ -1,0 +1,28 @@
+README
+# IMPORTANT Please create a branch before start editing.
+
+Please push and commit periodically -- do not make a bunch of changes and commit at once. You should be pushing every updates you made individually
+
+For every commit use the following format
+
+[CODE] Brief description of what have you done
+
+e.g. [UPDATE] Changed fetch code in xxx function
+
+CODES Avaliable and explainations as follow:
+
+[NEW] -- You've added new features
+
+[UPDATE] -- You've updated/modified an exisiting feature
+
+[BUG] -- You found a bug, and you are in a process of fixing it
+
+[BUG/FIXED] -- You found a bug, and fixed it
+
+[DELETE] -- You've deleted a feature/ part of a feature
+
+[RECTI] -- (Rectification) You've improved the code, etc
+
+[COMMENTS] -- You've added comments to the code (only use this when you didn't modify anything but just commenting)
+
+Feel free to keep adding stuff
