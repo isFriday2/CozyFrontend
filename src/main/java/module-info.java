@@ -11,6 +11,9 @@ module com.maddev.coozy {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
+    requires java.sql;
+    requires jbcrypt;
+
     opens com.maddev.coozy to javafx.fxml;
     exports com.maddev.coozy;
 }
