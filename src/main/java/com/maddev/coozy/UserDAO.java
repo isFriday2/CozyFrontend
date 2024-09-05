@@ -13,6 +13,15 @@ public class UserDAO {
         connection = DatabaseConnection.getInstance();
     }
 
+    //Example Password Validation after hash
+
+    // User Password Validation
+    //public boolean validatePassword (String inputPassword, String storedHashedPassword) {
+      //  String hashedInputPassword = User.hashPassword(inputPassword);
+
+        //return hashedInputPassword.equals(storedHashPassword)
+    //}
+
     //
     // Functions for CRUD with database
     //
