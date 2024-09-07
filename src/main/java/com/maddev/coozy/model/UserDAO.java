@@ -1,4 +1,4 @@
-package com.maddev.coozy;
+package com.maddev.coozy.model;
 
 import java.sql.*;
 import java.util.ArrayList;
