@@ -9,6 +9,7 @@ public class ChoreDAO {
     // Create DB connection instance
     public ChoreDAO() {
         connection = DatabaseConnection.getInstance();
+        createTable();
     }
 
     // Create table in db
@@ -25,8 +26,8 @@ public class ChoreDAO {
                             + "reward INTEGER NOT NULL,"
                             + "home VARCHAR NOT NULL,"
                             + "icon VARCHAR NOT NULL,"
-                            + "due_date VARCHAR,"
-                            + "FOREIGN KEY(userId) REFERENCES Users(id)"
+                            + "due_date VARCHAR"
+//                            + "FOREIGN KEY(userId) REFERENCES Users(id)"
                             + ")"
             );
         } catch (SQLException ex) {
