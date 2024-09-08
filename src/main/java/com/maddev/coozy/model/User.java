@@ -1,8 +1,7 @@
-package com.maddev.coozy;
+package com.maddev.coozy.model;
 
 // import jBCrypt password hashing library
 // Installed through Maven - required in modeule-info.java
-import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
     private int id;
@@ -32,6 +31,8 @@ public class User {
     }
 
     // Create getter functions
+    public int getId() { return id; }
+
     public String getUsername() {
         return username;
     }

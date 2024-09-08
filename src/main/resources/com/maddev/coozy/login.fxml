@@ -10,7 +10,7 @@
 
 <?import javafx.scene.layout.HBox?>
 <VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.maddev.coozy.LoginController">
+      fx:controller="com.maddev.coozy.controller.LoginController">
 
     <!-- Username Label and TextField -->
     <VBox spacing="5">
