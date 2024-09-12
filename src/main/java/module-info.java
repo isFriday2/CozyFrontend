@@ -14,6 +14,7 @@ module com.maddev.coozy {
     requires java.sql;
     requires jbcrypt;
     requires java.desktop;
+    requires de.jensd.fx.glyphs.fontawesome;
 
     opens com.maddev.coozy to javafx.fxml;
     exports com.maddev.coozy;
