@@ -1,4 +1,4 @@
-package com.maddev.coozy.controller;
+package com.maddev.coozy.controller.chore;
 
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
@@ -7,7 +7,6 @@ import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import javax.swing.*;
 import java.time.LocalDate;
 
 public class AddChoreController {

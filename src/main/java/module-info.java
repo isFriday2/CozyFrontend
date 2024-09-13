@@ -22,4 +22,6 @@ module com.maddev.coozy {
     opens com.maddev.coozy.controller to javafx.fxml;
     exports com.maddev.coozy.model;
     opens com.maddev.coozy.model to javafx.fxml;
+    exports com.maddev.coozy.controller.chore;
+    opens com.maddev.coozy.controller.chore to javafx.fxml;
 }

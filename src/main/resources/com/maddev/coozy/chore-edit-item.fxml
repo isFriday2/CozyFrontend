@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreItemController">
+<AnchorPane prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreEditItemController">
    <children>
-      <HBox layoutX="125.0" prefHeight="0.0" prefWidth="0.0" style="-fx-border-color: #a4c3b2; -fx-border-radius: 30; -fx-border-width: 5;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+      <HBox layoutX="125.0" prefHeight="0.0" prefWidth="0.0" style="-fx-border-color: #a4c3b2; -fx-border-radius: 30; -fx-border-width: 5; -fx-background-color: #d6d6d6; -fx-background-radius: 50;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <children>
-            <FontAwesomeIconView fx:id="choreIcon" size="40">
-               <HBox.margin>
-                  <Insets left="20.0" top="15.0" />
-               </HBox.margin>
-            </FontAwesomeIconView>
-            <VBox prefHeight="0.0" prefWidth="250.0">
+            <VBox prefHeight="0.0" prefWidth="230.0">
                <children>
                   <Label fx:id="choreTitle" prefHeight="56.0" prefWidth="230.0" text="ChoreTitel">
                      <VBox.margin>
@@ -40,14 +35,21 @@
                   </Label>
                </children>
             </VBox>
-            <Label fx:id="choreScore" prefHeight="70.0" prefWidth="78.0" text="+ XXX C" textFill="#a6a6a6">
+            <FontIcon iconLiteral="far-handshake" iconSize="35">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets top="15.0" />
                </HBox.margin>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="20.0" />
-               </font>
-            </Label>
+            </FontIcon>
+            <FontIcon iconLiteral="fas-info-circle" iconSize="35" tabSize="0">
+               <HBox.margin>
+                  <Insets left="15.0" top="15.0" />
+               </HBox.margin>
+            </FontIcon>
+            <FontIcon iconLiteral="fas-check-double" iconSize="35">
+               <HBox.margin>
+                  <Insets left="15.0" top="15.0" />
+               </HBox.margin>
+            </FontIcon>
          </children>
       </HBox>
    </children>
