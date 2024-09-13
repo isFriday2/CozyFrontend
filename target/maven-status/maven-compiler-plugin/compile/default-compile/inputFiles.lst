@@ -1,0 +1,11 @@
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/HelloApplication.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/Main.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/PopulateDB.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/controller/AddChoreController.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/controller/LoginController.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/model/Chore.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/model/ChoreDAO.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/model/DatabaseConnection.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/model/User.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/com/maddev/coozy/model/UserDAO.java
+/Users/sonniepoon/Projects/CozyFrontend/src/main/java/module-info.java
