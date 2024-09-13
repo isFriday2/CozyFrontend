@@ -29,7 +29,13 @@ public class ChoreItemController {
         }else{
             LocalDate dateNow=LocalDate.now();
             long daysDue=DAYS.between(dateNow, chore.getDueDate());
-            choreDueDate.setText("Due in "+daysDue+" days");
+            if(daysDue==0){
+                choreDueDate.setText("Due today");
+            }else if(daysDue < 0){
+                choreDueDate.setText("Over due");
+            }else{
+                choreDueDate.setText("Due in "+daysDue+" days");
+            }
         }
     }
 }

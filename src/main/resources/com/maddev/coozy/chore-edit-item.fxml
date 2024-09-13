@@ -45,7 +45,7 @@
                   <Insets left="15.0" top="15.0" />
                </HBox.margin>
             </FontIcon>
-            <FontIcon iconLiteral="fas-check-double" iconSize="35">
+            <FontIcon iconLiteral="far-trash-alt" iconSize="35">
                <HBox.margin>
                   <Insets left="15.0" top="15.0" />
                </HBox.margin>

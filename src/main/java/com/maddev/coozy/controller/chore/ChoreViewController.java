@@ -10,11 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class ChoreViewController{
@@ -35,9 +37,12 @@ public class ChoreViewController{
     private VBox choresLayout;
     @FXML
     private Button addChore;
+    @FXML
+    private Label date;
 
     // always call this function to load page but after setting a user for the controller
     public void init() {
+        date.setText(LocalDate.now().toString());
         List<Chore> chores = new ArrayList<>(getChores());
         for(Chore chore: chores){
             FXMLLoader fxmlLoader = new FXMLLoader();
