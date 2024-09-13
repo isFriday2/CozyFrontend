@@ -2,4 +2,5 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="choreAnchor" onContextMenuRequested="#onMouseDragged" prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreAnchorController" />
+
+<AnchorPane fx:id="choreAnchor" prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreAnchorController" />

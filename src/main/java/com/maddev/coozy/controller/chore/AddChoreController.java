@@ -1,17 +1,35 @@
 package com.maddev.coozy.controller.chore;
 
+import com.maddev.coozy.HelloApplication;
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class AddChoreController {
     private UserDAO userDAO;
     private ChoreDAO choreDAO;
+
+    public AddChoreController() {
+        userDAO= new UserDAO();
+        choreDAO= new ChoreDAO();
+    }
+
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private String icon;
 
 
@@ -25,12 +43,10 @@ public class AddChoreController {
     private TextField pointsTextField;
     @FXML
     private DatePicker dueDatePicker;
-
-
-    public AddChoreController() {
-         userDAO= new UserDAO();
-         choreDAO= new ChoreDAO();
-    }
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button cancelButton;
 
     @FXML
     private void setToTrash(){
@@ -58,7 +74,7 @@ public class AddChoreController {
     }
 
     @FXML
-    private void onAddChore() {
+    private void onAddChore() throws IOException {
         final String username=usernameTextField.getText();
         User assignedUser=userDAO.getByUsername(username);
         //todo two possible errors, user not found in data base or user not in the same home,
@@ -71,12 +87,28 @@ public class AddChoreController {
         final LocalDate dueDate = dueDatePicker.getValue();
 
 
-        Chore newChore = new Chore(userId, name, description, reward, home, icon, dueDate);
+        Chore newChore = new Chore(userId, name, description, reward, home, icon, dueDate, false);
         choreDAO.insert(newChore);
+
+        Stage stage = (Stage) addButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));
+        Parent root = fxmlLoader.load();
+        ChoreViewController controller=fxmlLoader.getController();
+        controller.setUser(user);
+        controller.init();
+        Scene scene = new Scene(root,1133, 744);
+        stage.setScene(scene);
     }
 
     @FXML
-    private void onCancel() {
-
+    private void onCancel() throws IOException {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));
+        Parent root = fxmlLoader.load();
+        ChoreViewController controller=fxmlLoader.getController();
+        controller.setUser(user);
+        controller.init();
+        Scene scene = new Scene(root,1133, 744);
+        stage.setScene(scene);
     }
 }

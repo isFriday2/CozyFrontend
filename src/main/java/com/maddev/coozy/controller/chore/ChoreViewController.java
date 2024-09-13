@@ -1,24 +1,44 @@
 package com.maddev.coozy.controller.chore;
 
+import com.maddev.coozy.HelloApplication;
 import com.maddev.coozy.model.Chore;
+import com.maddev.coozy.model.User;
+import com.maddev.coozy.model.ChoreDAO;
+import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.time.LocalDate;
 import java.util.*;
 
-public class ChoreViewController implements Initializable {
+public class ChoreViewController{
+    private UserDAO userDAO;
+    private ChoreDAO choreDAO;
+
+    public ChoreViewController(){
+        userDAO = new UserDAO();
+        choreDAO = new ChoreDAO();
+    }
+
+    private User user;
+    public void setUser(User user){
+        this.user=user;
+    }
+
     @FXML
     private VBox choresLayout;
+    @FXML
+    private Button addChore;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<Chore> chores = new ArrayList<>(mockChores());
+    // always call this function to load page but after setting a user for the controller
+    public void init() {
+        List<Chore> chores = new ArrayList<>(getChores());
         for(Chore chore: chores){
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/com/maddev/coozy/chore-anchor.fxml"));
@@ -35,15 +55,18 @@ public class ChoreViewController implements Initializable {
         }
     }
 
-    private List<Chore> mockChores(){
-        List<Chore> ls = new ArrayList<>();
-        LocalDate date = LocalDate.of(2024, 9, 20);
-        Chore chore = new Chore(1, 1, "Clean bathroom", "Clean both bathrooms, use jabon rey", 30, "1", "BOOK",date);
-        Chore chore2 = new Chore(1, 1, "Hola estoy ensayando que pasa si el titulo es muy largo", "Clean both bathrooms, use jabon rey", 30, "1", "PLUS",date);
-        Chore chore3 = new Chore(1, 1, "Clean bathroom", "Clean both bathrooms, use jabon rey", 30, "1", "SHOWER",date);
-        ls.add(chore);
-        ls.add(chore2);
-        ls.add(chore3);
-        return ls;
+    private List<Chore> getChores(){
+        return choreDAO.getAllByUser(user.getId());
+    }
+
+    @FXML
+    public void onAddChore() throws IOException{
+        Stage stage = (Stage) addChore.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("add-chore.fxml"));
+        Parent root = fxmlLoader.load();
+        AddChoreController controller=fxmlLoader.getController();
+        controller.setUser(user);
+        Scene scene = new Scene(root,600,400);
+        stage.setScene(scene);
     }
 }

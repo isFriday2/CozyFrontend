@@ -2,6 +2,8 @@ package com.maddev.coozy.model;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChoreDAO {
     private Connection connection;
@@ -26,7 +28,8 @@ public class ChoreDAO {
                             + "reward INTEGER NOT NULL,"
                             + "home VARCHAR NOT NULL,"
                             + "icon VARCHAR NOT NULL,"
-                            + "due_date VARCHAR"
+                            + "due_date VARCHAR,"
+                            + "completed INT"
 //                            + "FOREIGN KEY(userId) REFERENCES Users(id)"
                             + ")"
             );
@@ -39,7 +42,7 @@ public class ChoreDAO {
     public void insert(Chore chore) {
         try {
             PreparedStatement insertChore = connection.prepareStatement(
-                    "INSERT INTO chores (user_id, name, description, reward, home, icon, due_date) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO chores (user_id, name, description, reward, home, icon, due_date, completed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
             );
             insertChore.setInt(1, chore.getUserId());
             insertChore.setString(2, chore.getName());
@@ -48,6 +51,7 @@ public class ChoreDAO {
             insertChore.setString(5, chore.getHome());
             insertChore.setString(6, chore.getIcon());
             insertChore.setString(7, chore.getDueDate().toString());
+            insertChore.setInt(8, chore.isCompleted() ? 1 : 0);
             insertChore.execute();
         } catch (SQLException ex) {
             System.err.println(ex);
@@ -58,7 +62,8 @@ public class ChoreDAO {
     public void update(Chore chore) {
         try {
             PreparedStatement updateChore = connection.prepareStatement(
-                    "UPDATE chores SET user_id = ?, name = ?, description = ?, reward = ?, home = ?, icon = ?, due_date = ? WHERE id = ?\""
+                    "UPDATE chores SET user_id = ?, name = ?, description = ?, reward = ?, home = ?, icon = ?," +
+                            " due_date = ?, completed = ? WHERE id = ?"
             );
             updateChore.setInt(1, chore.getUserId());
             updateChore.setString(2, chore.getName());
@@ -67,7 +72,8 @@ public class ChoreDAO {
             updateChore.setString(5, chore.getHome());
             updateChore.setString(6, chore.getIcon());
             updateChore.setString(7, chore.getDueDate().toString());
-            updateChore.setInt(8, chore.getId());
+            updateChore.setInt(8, chore.isCompleted() ? 1 : 0);
+            updateChore.setInt(9, chore.getId());
             updateChore.execute();
         } catch (SQLException ex) {
             System.err.println(ex);
@@ -102,12 +108,41 @@ public class ChoreDAO {
                         rs.getInt("reward"),
                         rs.getString("home"),
                         rs.getString("icon"),
-                        LocalDate.parse(rs.getString("due_date"))
+                        LocalDate.parse(rs.getString("due_date")),
+                        rs.getInt("completed")==1
                 );
             }
         } catch (SQLException ex) {
             System.err.println(ex);
         }
         return null;
+    }
+
+    // get all the chores belonging to one user by user id
+    public List<Chore> getAllByUser(int id) {
+        List<Chore> chores= new ArrayList<>();
+        try {
+            PreparedStatement getChores = connection.prepareStatement("SELECT * FROM chores WHERE user_id = ?");
+            getChores.setInt(1, id);
+            ResultSet rs = getChores.executeQuery();
+            while (rs.next()) {
+                chores.add(
+                        new Chore(
+                                rs.getInt("id"),
+                                rs.getInt("user_id"),
+                                rs.getString("name"),
+                                rs.getString("description"),
+                                rs.getInt("reward"),
+                                rs.getString("home"),
+                                rs.getString("icon"),
+                                LocalDate.parse(rs.getString("due_date")),
+                                rs.getInt("completed")==1
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return chores;
     }
 }

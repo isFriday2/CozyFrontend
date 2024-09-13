@@ -4,9 +4,7 @@ import com.maddev.coozy.model.Chore;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
 import java.time.LocalDate;
-
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ChoreItemController {
@@ -24,10 +22,14 @@ public class ChoreItemController {
 
     public void setData(Chore chore){
         choreIcon.setGlyphName(chore.getIcon());
-        choreScore.setText("+ " + Integer.toString(chore.getReward()) + " C");
+        choreScore.setText("+ " + chore.getReward() + " C");
         choreTitle.setText(chore.getName());
-        LocalDate dateNow=LocalDate.now();
-        long daysDue=DAYS.between(dateNow, chore.getDueDate());
-        choreDueDate.setText("Due in "+Long.toString(daysDue)+" days");
+        if(chore.isCompleted()){
+            choreDueDate.setText("Chore Completed");
+        }else{
+            LocalDate dateNow=LocalDate.now();
+            long daysDue=DAYS.between(dateNow, chore.getDueDate());
+            choreDueDate.setText("Due in "+daysDue+" days");
+        }
     }
 }

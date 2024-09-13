@@ -14,10 +14,12 @@ public class Chore {
     private String home;
     private String icon;
     private LocalDate dueDate;
+    private boolean completed;
 
 
     // Constructor including all fields
-    public Chore(int id, int userId, String name, String description, int reward, String home, String icon, LocalDate dueDate) {
+    public Chore(int id, int userId, String name, String description, int reward,
+                 String home, String icon, LocalDate dueDate, boolean completed) {
         this.id = id;
         this.userId=userId;
         this.name=name;
@@ -26,10 +28,12 @@ public class Chore {
         this.home = home;
         this.icon=icon;
         this.dueDate=dueDate;
+        this.completed=completed;
     }
 
     // Constructor without id for auto incrementing
-    public Chore(int userId, String name, String description, int reward, String home, String icon, LocalDate dueDate) {
+    public Chore(int userId, String name, String description, int reward,
+                 String home, String icon, LocalDate dueDate, boolean completed) {
         this.userId=userId;
         this.name=name;
         this.description=description;
@@ -37,6 +41,7 @@ public class Chore {
         this.home = home;
         this.icon=icon;
         this.dueDate=dueDate;
+        this.completed=completed;
     }
 
     // Create getter functions
@@ -72,6 +77,10 @@ public class Chore {
         return dueDate;
     }
 
+    public boolean isCompleted(){
+        return completed;
+    }
+
     // Create setter functions
     public void setId(int id) {
         this.id=id;
@@ -103,5 +112,9 @@ public class Chore {
 
     public void setDueDate(LocalDate dueDate){
         this.dueDate=dueDate;
+    }
+
+    public void setCompleted(boolean completed){
+        this.completed=completed;
     }
 }
