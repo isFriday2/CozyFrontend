@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox fx:controller="com.maddev.coozy.controller.leaderboard.LeaderboardController"
+      xmlns:fx="http://javafx.com/fxml" spacing="10" style="-fx-background-color: #f0f0f0;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Leaderboard" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <Button text="Daily" onAction="#onDailyButtonClicked"/>
+        <Button text="Weekly" onAction="#onWeeklyButtonClicked"/>
+        <Button text="Monthly" onAction="#onMonthlyButtonClicked"/>
+    </HBox>
+
+    <HBox spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
+        <Label text="This Week"/>
+        <Label fx:id="dateLabel"/>
+        <ImageView>
+<!--            <image>-->
+<!--                <Image url="@/images/calendar_icon.png"/>-->
+<!--            </image>-->
+        </ImageView>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <VBox fx:id="entriesBox" spacing="10"/>
+    </ScrollPane>
+
+    <Button text="View all" style="-fx-background-color: transparent; -fx-text-fill: #888888;" onAction="#onViewAllClicked"/>
+</VBox>
