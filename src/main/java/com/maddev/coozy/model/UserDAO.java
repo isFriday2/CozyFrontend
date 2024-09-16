@@ -1,4 +1,4 @@
-package com.maddev.coozy;
+package com.maddev.coozy.model;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ public class UserDAO {
     // Create DB connection instance
     public UserDAO() {
         connection = DatabaseConnection.getInstance();
+        createTable();
     }
 
     //Example Password Validation after hash
@@ -34,12 +35,14 @@ public class UserDAO {
             createTable.execute(
                     "CREATE TABLE IF NOT EXISTS Users ("
                             + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                            + "username VARCHAR,"
                             + "email VARCHAR NOT NULL, "
                             + "nickname VARCHAR, "
                             + "home VARCHAR, "
                             + "password VARCHAR NOT NULL"
                             + ")"
             );
+            System.out.println("table Users created");
         } catch (SQLException ex) {
             System.err.println(ex);
         }
@@ -148,6 +151,7 @@ public class UserDAO {
             ResultSet rs = getUser.executeQuery();
             if (rs.next()) {
                 return new User(
+                        rs.getInt("id"),
                         rs.getString("username"),
                         rs.getString("email"),
                         rs.getString("nickname"),

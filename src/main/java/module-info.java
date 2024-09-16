@@ -8,12 +8,17 @@ module com.maddev.coozy {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
+//    requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
     requires java.sql;
     requires jbcrypt;
+    requires java.desktop;
 
     opens com.maddev.coozy to javafx.fxml;
     exports com.maddev.coozy;
+    exports com.maddev.coozy.controller;
+    opens com.maddev.coozy.controller to javafx.fxml;
+    exports com.maddev.coozy.model;
+    opens com.maddev.coozy.model to javafx.fxml;
 }

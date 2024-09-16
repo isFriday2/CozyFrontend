@@ -1,4 +1,4 @@
-package com.maddev.coozy;
+package com.maddev.coozy.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
