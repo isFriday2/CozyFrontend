@@ -118,6 +118,7 @@ public class UserDAO {
         return users;
     }
 
+    // Get user by ID
     public User getById(int id) {
         try {
             PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
@@ -139,6 +140,7 @@ public class UserDAO {
         return null;
     }
 
+    // Get user by username
     public User getByUsername(String username) {
         try {
             PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
