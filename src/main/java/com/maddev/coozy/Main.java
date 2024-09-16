@@ -1,5 +1,8 @@
 package com.maddev.coozy;
 
+import com.maddev.coozy.model.DatabaseConnection;
+import com.maddev.coozy.model.UserDAO;
+
 import java.sql.Connection;
 
 import javafx.application.Application;
