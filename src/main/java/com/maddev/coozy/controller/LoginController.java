@@ -9,6 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 public class LoginController {
     @FXML
     private TextField usernameField;
@@ -38,6 +43,27 @@ public class LoginController {
             // Check if input password(hashed) matches db instances
             if (hashedInputPassword.equals(user.getPassword())) {
                 // Successful login
+                try {
+                    // Load home-page.fxml as new window
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("com.maddev.coozy/resources/home-page.fxml"));
+                    Parent homePage = loader.load();
+
+                    // Get the current stage
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+
+                    // Set New Window Scene
+                    stage.setScene(new Scene(homePage));
+                    stage.setTitle("Home");
+
+                } catch (Exception e) {
+
+                    // Create Error Alert
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("An error occurred");
+                    alert.setContentText("There was an issue loading the home page. Please try again later.");
+                    alert.showAndWait();
+                }
 
 
             } else {
@@ -47,7 +73,7 @@ public class LoginController {
             }
         } else {
             // User not found
-            showAlert(AlertType.ERROR, "Incorrect Username", "User not found.");
+            showAlert(AlertType.ERROR, "Incorrect Details", "User not found.");
 
         }
     }

@@ -45,7 +45,7 @@
                     <TextField fx:id="usernameField" minWidth="100" />
                     <Label text="Password:" />
                     <PasswordField fx:id="passwordField" minWidth="100" />
-                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Login">
+                    <Button fx:id="loginButton" onAction="#handleLoginButtonAction" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Login">
                   <VBox.margin>
                      <Insets left="48.0" />
                   </VBox.margin></Button>
