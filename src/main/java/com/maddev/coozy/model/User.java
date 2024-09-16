@@ -1,4 +1,4 @@
-package com.maddev.coozy;
+package com.maddev.coozy.model;
 
 // import SHA-256 security libraries
 import java.security.MessageDigest;
@@ -33,6 +33,8 @@ public class User {
     }
 
     // Create getter functions
+    public int getId() {return id;}
+
     public String getUsername() {
         return username;
     }

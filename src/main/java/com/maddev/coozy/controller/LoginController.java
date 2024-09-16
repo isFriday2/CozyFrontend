@@ -1,4 +1,6 @@
 package com.maddev.coozy.controller;
+import com.maddev.coozy.model.User;
+import com.maddev.coozy.model.UserDAO;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

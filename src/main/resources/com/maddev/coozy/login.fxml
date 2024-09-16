@@ -6,65 +6,56 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.LoginController">
-   <children>
-      <VBox>
-         <children>
-            <Label alignment="CENTER" text="Login" underline="true">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <padding>
-                  <Insets left="140.0" />
-               </padding>
-            </Label>
-            <HBox>
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Coozy:">
-                           <padding>
-                              <Insets left="15.0" top="15.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="System Bold Italic" size="14.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../java/com/maddev/coozy/login.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="15.0" />
-                           </VBox.margin>
-                        </ImageView>
-                     </children></VBox>
-                  <VBox alignment="CENTER" spacing="10">
-
-                      <!-- Username Label and TextField -->
-                      <VBox spacing="5.0">
-                          <Label text="Username:" />
-                          <TextField fx:id="usernameField" minWidth="100" />
-                          <Label text="Password:" />
-                          <PasswordField fx:id="passwordField" minWidth="100" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Login" />
-                      </VBox>
-
-                      <padding>
-                          <Insets bottom="20" left="20" right="20" top="20" />
-                      </padding>
-                  </VBox>
-               </children>
-            </HBox>
-            <Hyperlink text="Don't have an account? Register Now" textAlignment="CENTER">
-               <padding>
-                  <Insets bottom="10.0" left="80.0" />
-               </padding>
-            </Hyperlink>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.LoginController">
+    <VBox spacing="10" alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+        <Label alignment="CENTER" text="Login" underline="true">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+            <padding>
+                <Insets left="140.0" />
+            </padding>
+        </Label>
+        <HBox spacing="10" alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="100.0" alignment="CENTER">
+                <Label text="Coozy:">
+                    <padding>
+                        <Insets left="15.0" top="15.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../java/com/maddev/coozy/login.jpg" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="15.0" />
+                    </VBox.margin>
+                </ImageView>
+            </VBox>
+            <VBox spacing="10" alignment="CENTER">
+                <!-- Username Label and TextField -->
+                <VBox spacing="5.0">
+                    <Label text="Username:" />
+                    <TextField fx:id="usernameField" minWidth="100" />
+                    <Label text="Password:" />
+                    <PasswordField fx:id="passwordField" minWidth="100" />
+                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Login" />
+                </VBox>
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="20" />
+                </padding>
+            </VBox>
+        </HBox>
+        <Hyperlink text="Don't have an account? Register Now" textAlignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="80.0" />
+            </padding>
+        </Hyperlink>
+    </VBox>
 </AnchorPane>
