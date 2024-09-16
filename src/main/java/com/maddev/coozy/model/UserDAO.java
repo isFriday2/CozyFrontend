@@ -14,15 +14,6 @@ public class UserDAO {
         createTable();
     }
 
-    //Example Password Validation after hash
-
-    // User Password Validation
-    //public boolean validatePassword (String inputPassword, String storedHashedPassword) {
-      //  String hashedInputPassword = User.hashPassword(inputPassword);
-
-        //return hashedInputPassword.equals(storedHashPassword)
-    //}
-
     //
     // Functions for CRUD with database
     //
@@ -164,6 +155,27 @@ public class UserDAO {
         }
         return null;
     }
+
+    //
+    // Password Validation with SHA-256
+    //
+
+    // Password Validation - using hashing method for security
+    public boolean validatePassword(String username, String inputPassword) {
+        User user = getByUsername(username); // Fetch user by username
+
+        if (user != null) {
+            // Hash the input password using SHA-256
+            String hashedInputPassword = User.hashPassword(inputPassword);
+
+            // Compare the hashed input password with the stored hashed password
+            return hashedInputPassword.equals(user.getPassword());
+        }
+
+        // Return false if the user is not found
+        return false;
+    }
+
 
     // Terminate connection function
     public void close() {

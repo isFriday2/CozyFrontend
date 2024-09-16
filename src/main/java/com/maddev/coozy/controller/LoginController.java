@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class LoginController {
     @FXML
@@ -31,16 +33,21 @@ public class LoginController {
 
         // Check user input
         if (user != null) {
-            // Check if the password is correct (using hashed password verification) for user
-            if (User.hashPassword(password).equals(user.getPassword())) {
+            // Hash password input
+            String hashedInputPassword = User.hashPassword(password);
+            // Check if input password(hashed) matches db instances
+            if (hashedInputPassword.equals(user.getPassword())) {
                 // Successful login
 
+
             } else {
-                // Incorrect password
+                // Incorrect Login
+                showAlert(AlertType.ERROR, "Login Failed", "Incorrect Password");
 
             }
         } else {
             // User not found
+            showAlert(AlertType.ERROR, "Incorrect Username", "User not found.");
 
         }
     }
@@ -49,6 +56,15 @@ public class LoginController {
     private void handleRegisterLinkAction() {
         // Handle the button click for register acccount
         // Open new stage for register form
+    }
+
+    // Method for showing alerts using Alert
+    private void showAlert(AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     }
