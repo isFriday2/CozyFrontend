@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class AddChoreController {
     private UserDAO userDAO;
@@ -32,13 +33,12 @@ public class AddChoreController {
 
     private String icon;
 
-
     @FXML
     private TextArea descriptionTextArea;
     @FXML
     private TextField nameTextField;
     @FXML
-    private TextField usernameTextField;
+    private ChoiceBox<String> chooseUsername;
     @FXML
     private TextField pointsTextField;
     @FXML
@@ -73,9 +73,17 @@ public class AddChoreController {
         icon="SHOWER";
     }
 
+    public void setChoiceUsernames(){
+        chooseUsername.setValue("Assign chore");
+        List<User> possibleUsers=userDAO.getAllByHome(user.getHome());
+        for(User possibleUser: possibleUsers){
+            chooseUsername.getItems().add(possibleUser.getUsername());
+        }
+    }
+
     @FXML
     private void onAddChore() throws IOException {
-        final String username=usernameTextField.getText();
+        final String username=chooseUsername.getValue();
         User assignedUser=userDAO.getByUsername(username);
         //todo two possible errors, user not found in data base or user not in the same home,
 
@@ -85,7 +93,6 @@ public class AddChoreController {
         final int reward = Integer.parseInt(pointsTextField.getText());
         final String home = assignedUser.getHome();
         final LocalDate dueDate = dueDatePicker.getValue();
-
 
         Chore newChore = new Chore(userId, name, description, reward, home, icon, dueDate, false);
         choreDAO.insert(newChore);

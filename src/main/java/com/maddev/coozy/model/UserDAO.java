@@ -112,6 +112,30 @@ public class UserDAO {
         return users;
     }
 
+    public List<User> getAllByHome(String home) {
+        List<User> users = new ArrayList<>();
+        try {
+            PreparedStatement getByHome = connection.prepareStatement("SELECT * FROM users WHERE home = ?");
+            getByHome.setString(1, home);
+            ResultSet rs = getByHome.executeQuery();
+            while (rs.next()) {
+                users.add(
+                        new User(
+                                rs.getInt("id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("nickname"),
+                                rs.getString("home"),
+                                rs.getString("password")
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return users;
+    }
+
     // Get user by ID
     public User getById(int id) {
         try {

@@ -71,6 +71,7 @@ public class ChoreViewController{
         Parent root = fxmlLoader.load();
         AddChoreController controller=fxmlLoader.getController();
         controller.setUser(user);
+        controller.setChoiceUsernames();
         Scene scene = new Scene(root,600,400);
         stage.setScene(scene);
     }
