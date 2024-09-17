@@ -1,36 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.layout.HBox?>
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.maddev.coozy.controller.LoginController">
-
-    <!-- Username Label and TextField -->
-    <VBox spacing="5">
-        <Label text="Username:" />
-        <TextField fx:id="usernameField" minWidth="100" />
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.LoginController">
+    <VBox alignment="CENTER" spacing="10" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <Label alignment="CENTER" text="Login" textFill="#62bfed">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="24.0" />
+            </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+        </Label>
+        <HBox alignment="CENTER" spacing="10">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                <Label text="Coozy:" textFill="#62bfed" underline="true">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                    </font>
+                </Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@../../../image/login.jpg" />
+               </image>
+            </ImageView>
+            </VBox>
+            <VBox alignment="CENTER" spacing="10">
+                <!-- Username Label and TextField -->
+                <VBox spacing="15.0">
+                    <TextField fx:id="usernameField" minWidth="100" promptText="Username">
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin></TextField>
+                    <PasswordField fx:id="passwordField" minWidth="100" promptText="Password">
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin></PasswordField>
+                    <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLoginButtonAction" text="Login" textFill="#62bfed">
+                  <VBox.margin>
+                     <Insets left="48.0" />
+                  </VBox.margin>
+                  <font>
+                     <Font name="Arial Rounded MT Bold" size="14.0" />
+                  </font></Button>
+                </VBox>
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" />
+                </padding>
+            </VBox>
+        </HBox>
+        <Hyperlink text="Don't have an account? Register Now" textAlignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" />
+            </padding>
+        </Hyperlink>
     </VBox>
-
-    <!-- Password Label and PasswordField -->
-    <VBox spacing="5">
-        <Label text="Password:" />
-        <PasswordField fx:id="passwordField" minWidth="100" />
-    </VBox>
-
-    <!-- Login Button -->
-    <Button text="Login" fx:id="loginButton" onAction="#handleLoginButtonAction" />
-
-    <!-- Register Hyperlink -->
-    <Hyperlink text="New to Coozy? Sign up here" fx:id="registerLink" onAction="#handleRegisterLinkAction" />
-
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
-</VBox>
+</AnchorPane>

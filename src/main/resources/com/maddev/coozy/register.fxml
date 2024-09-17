@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.RegisterController">
+    <children>
+        <Label layoutX="181.0" layoutY="14.0" text="Register an Account" textFill="#62bfed">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="24.0" />
+            </font>
+        </Label>
+        <VBox layoutX="128.0" layoutY="42.0" prefHeight="268.0" prefWidth="336.0" spacing="25.0">
+            <children>
+                <HBox prefHeight="28.0" prefWidth="336.0" spacing="35.0">
+                    <children>
+                        <TextField fx:id="usernameField" promptText="Username" />
+                        <TextField fx:id="nicknameField" promptText="Nickname" />
+                    </children>
+                </HBox>
+                <TextField fx:id="emailField" promptText="Email" />
+                <TextField fx:id="homeField" prefHeight="41.0" prefWidth="336.0" promptText="Address" />
+                <PasswordField fx:id="passwordField" prefHeight="23.0" prefWidth="336.0" promptText="Password" />
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Button fx:id="registerButton" mnemonicParsing="false" text="Register" textFill="#62bfed">
+                            <HBox.margin>
+                                <Insets left="100.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="Arial Rounded MT Bold" size="12.0" />
+                            </font></Button>
+                        <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" textAlignment="CENTER" textFill="RED" />
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>
