@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="leaderboardContainer" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.leaderboard.LeaderboardController">
+<VBox fx:id="leaderboardContainer" xmlns:fx="http://javafx.com/fxml/1" >
     <Label text="Leaderboard" styleClass="leaderboard-title"/>
     <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
         <VBox fx:id="entriesContainer" spacing="10" styleClass="leaderboard-entries"/>
