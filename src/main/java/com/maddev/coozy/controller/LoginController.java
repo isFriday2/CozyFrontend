@@ -1,4 +1,5 @@
 package com.maddev.coozy.controller;
+import com.maddev.coozy.controller.chore.ChoreViewController;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 
@@ -42,12 +43,16 @@ public class LoginController {
         if (user != null) {
             // Hash password input
             String hashedInputPassword = User.hashPassword(password);
+            System.out.println(hashedInputPassword);
             // Check if input password(hashed) matches db instances
             if (hashedInputPassword.equals(user.getPassword())) {
                 // Successful login
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/home-page.fxml"));
                     Parent homePage = loader.load();
+                    ChoreViewController controller=loader.getController();
+                    controller.setUser(user);
+                    controller.init();
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.setScene(new Scene(homePage));
                     stage.setTitle("Home");
