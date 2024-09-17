@@ -1,75 +1,110 @@
 package com.maddev.coozy.controller.leaderboard;
 
-import com.maddev.coozy.model.Leaderboard;
-import com.maddev.coozy.model.LeaderboardEntry;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import com.maddev.coozy.model.User;
+import com.maddev.coozy.model.Chore;
+import com.maddev.coozy.model.UserDAO;
+import com.maddev.coozy.model.ChoreDAO;
 
-import java.io.IOException;
-import java.time.LocalDate;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
+import javafx.geometry.Pos;
+
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class LeaderboardController {
-    private Leaderboard model;
 
     @FXML
-    private VBox entriesBox;
-    @FXML
-    private Label dateLabel;
+    private VBox entriesContainer;
+
+    private UserDAO userDAO;
+    private ChoreDAO choreDAO;
+    private User currentUser;
 
     public LeaderboardController() {
-        model = new Leaderboard();
+        userDAO = new UserDAO();
+        choreDAO = new ChoreDAO();
     }
 
-    public void init() {
-        dateLabel.setText(LocalDate.now().toString());
-        List<LeaderboardEntry> entries = model.getEntries();
-        for (LeaderboardEntry entry : entries) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/com/maddev/coozy/leaderboard-entry.fxml"));
-            try {
-                AnchorPane anchorPane = fxmlLoader.load();
-                LeaderboardEntryController controller = fxmlLoader.getController();
-                controller.setEntry(entry);
-                controller.setData();
-                entriesBox.getChildren().add(anchorPane);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void initialize() {
+        System.out.println("LeaderboardController initialize called");
+    }
+
+    public void setUser(User user) {
+        this.currentUser = user;
+    }
+
+    // Renamed from init() to initializeLeaderboard()
+    public void initLeaderboard() {
+        updateLeaderboard();
+    }
+
+    private void updateLeaderboard() {
+        entriesContainer.getChildren().clear();
+        List<User> users = userDAO.getAll();
+
+        Map<User, Integer> userPoints = calculateUserPoints(users);
+
+        List<Map.Entry<User, Integer>> sortedEntries = userPoints.entrySet().stream()
+                .sorted((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()))
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < sortedEntries.size(); i++) {
+            Map.Entry<User, Integer> entry = sortedEntries.get(i);
+            HBox userEntry = createUserEntry(entry.getKey(), entry.getValue(), i + 1);
+            entriesContainer.getChildren().add(userEntry);
         }
     }
 
-    @FXML
-    public void onDailyButtonClicked() {
-        updateLeaderboard("daily");
-    }
-
-    @FXML
-    public void onWeeklyButtonClicked() {
-        updateLeaderboard("weekly");
-    }
-
-    @FXML
-    public void onMonthlyButtonClicked() {
-        updateLeaderboard("monthly");
-    }
-
-    private void updateLeaderboard(String period) {
-        // Update model based on the selected period
-        List<LeaderboardEntry> filteredEntries = model.getEntriesByPeriod(period);
-        // Refresh the leaderboard entries
-        entriesBox.getChildren().clear();
-        for (LeaderboardEntry entry : filteredEntries) {
-            // Similar to init(), create and add entry views
-            // You might want to extract this into a separate method to avoid code duplication
+    private Map<User, Integer> calculateUserPoints(List<User> users) {
+        Map<User, Integer> userPoints = new HashMap<>();
+        for (User user : users) {
+            List<Chore> userChores = choreDAO.getAllByUser(user.getId());
+            int points = userChores.stream()
+                    .filter(Chore::isCompleted)
+                    .mapToInt(Chore::getReward)
+                    .sum();
+            userPoints.put(user, points);
         }
+        return userPoints;
     }
 
-    @FXML
-    public void onViewAllClicked() {
-        // Implement view all functionality
+    private HBox createUserEntry(User user, int points, int rank) {
+        HBox userEntry = new HBox(10);
+        userEntry.setAlignment(Pos.CENTER_LEFT);
+        userEntry.getStyleClass().add("leaderboard-entry");
+
+        Label rankLabel = new Label(String.valueOf(rank));
+        rankLabel.getStyleClass().add("rank-label");
+
+        ImageView avatar = new ImageView(new Image("src/main/resources/image/profilePic.png")); // Replace with actual path
+        avatar.setFitHeight(40);
+        avatar.setFitWidth(40);
+        Circle clip = new Circle(20, 20, 20);
+        avatar.setClip(clip);
+
+        VBox userInfo = new VBox(5);
+        Label nameLabel = new Label(user.getNickname());
+        Label roleLabel = new Label(user.getHome());
+        userInfo.getChildren().addAll(nameLabel, roleLabel);
+
+        Label pointsLabel = new Label(points + "c");
+        pointsLabel.getStyleClass().add("points-label");
+
+        HBox.setHgrow(userInfo, Priority.ALWAYS);
+        userEntry.getChildren().addAll(rankLabel, avatar, userInfo, pointsLabel);
+
+        return userEntry;
+    }
+    public void refreshLeaderboard() {
+        updateLeaderboard();
     }
 }

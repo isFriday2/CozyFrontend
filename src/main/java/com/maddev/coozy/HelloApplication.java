@@ -18,12 +18,13 @@ public class HelloApplication extends Application {
         // Test database connection
         testDatabaseConnection();
 
-        User user = new User(1, "martin", "martin@gmail", "martinius", "1", "1234");
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/com/maddev/coozy/home-page.fxml"));
         Parent root = fxmlLoader.load();
         ChoreViewController controller = fxmlLoader.getController();
+
+        User user = new User(1, "martin", "martin@gmail", "martinius", "1", "1234");
+
         controller.setUser(user);
         controller.init();
 
