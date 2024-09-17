@@ -1,37 +1,66 @@
 package com.maddev.coozy.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Leaderboard {
+    private List<User> users;
+    private List<Chore> chores;
     private List<LeaderboardEntry> entries;
 
-    public Leaderboard() {
-        this.entries = new ArrayList<>();
-        // In a real application, you would likely load data from a database here
+    public Leaderboard(List<User> users, List<Chore> chores) {
+        this.users = users;
+        this.chores = chores;
+        calculateLeaderboard();
+    }
+
+    private void calculateLeaderboard() {
+        Map<Integer, Integer> userPoints = calculateUserPoints();
+        entries = userPoints.entrySet().stream()
+                .map(entry -> {
+                    User user = users.stream()
+                            .filter(u -> u.getId() == entry.getKey())
+                            .findFirst()
+                            .orElseThrow(() -> new RuntimeException("User not found"));
+                    return new LeaderboardEntry(user, entry.getValue());
+                })
+                .sorted((e1, e2) -> Integer.compare(e2.getPoints(), e1.getPoints()))
+                .collect(Collectors.toList());
+
+        // Assign ranks
+        for (int i = 0; i < entries.size(); i++) {
+            entries.get(i).setRank(i + 1);
+        }
+    }
+
+    private Map<Integer, Integer> calculateUserPoints() {
+        return chores.stream()
+                .filter(Chore::isCompleted)
+                .collect(Collectors.groupingBy(
+                        Chore::getUserId,
+                        Collectors.summingInt(Chore::getReward)
+                ));
     }
 
     public List<LeaderboardEntry> getEntries() {
         return entries;
     }
 
-    public void addEntry(LeaderboardEntry entry) {
-        entries.add(entry);
-    }
+    public static class LeaderboardEntry {
+        private User user;
+        private int points;
+        private int rank;
 
-    public void removeEntry(LeaderboardEntry entry) {
-        entries.remove(entry);
-    }
-
-    public List<LeaderboardEntry> getEntriesByPeriod(String period) {
-        List<LeaderboardEntry> filteredEntries = new ArrayList<>();
-        for (LeaderboardEntry entry : entries) {
-            if (entry.getPeriod().equals(period)) {
-                filteredEntries.add(entry);
-            }
+        public LeaderboardEntry(User user, int points) {
+            this.user = user;
+            this.points = points;
         }
-        return filteredEntries;
-    }
 
-    // Add more methods as needed, such as sorting entries, updating scores, etc.
+        // Getters and setters
+        public User getUser() { return user; }
+        public int getPoints() { return points; }
+        public int getRank() { return rank; }
+        public void setRank(int rank) { this.rank = rank; }
+    }
 }
