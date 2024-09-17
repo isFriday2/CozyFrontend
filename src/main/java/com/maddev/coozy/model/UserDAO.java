@@ -96,14 +96,14 @@ public class UserDAO {
             ResultSet rs = getAll.executeQuery("SELECT * FROM users");
             while (rs.next()) {
                 users.add(
-                    new User(
-                            rs.getInt("id"),
-                            rs.getString("username"),
-                            rs.getString("email"),
-                            rs.getString("nickname"),
-                            rs.getString("home"),
-                            rs.getString("password")
-                    )
+                        new User(
+                                rs.getInt("id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("nickname"),
+                                rs.getString("home"),
+                                rs.getString("password")
+                        )
                 );
             }
         } catch (SQLException ex) {
@@ -112,6 +112,7 @@ public class UserDAO {
         return users;
     }
 
+    // Get user by ID
     public User getById(int id) {
         try {
             PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
@@ -133,6 +134,7 @@ public class UserDAO {
         return null;
     }
 
+    // Get user by username
     public User getByUsername(String username) {
         try {
             PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
@@ -153,6 +155,27 @@ public class UserDAO {
         }
         return null;
     }
+
+    //
+    // Password Validation with SHA-256
+    //
+
+    // Password Validation - using hashing method for security
+    public boolean validatePassword(String username, String inputPassword) {
+        User user = getByUsername(username); // Fetch user by username
+
+        if (user != null) {
+            // Hash the input password using SHA-256
+            String hashedInputPassword = User.hashPassword(inputPassword);
+
+            // Compare the hashed input password with the stored hashed password
+            return hashedInputPassword.equals(user.getPassword());
+        }
+
+        // Return false if the user is not found
+        return false;
+    }
+
 
     // Terminate connection function
     public void close() {
