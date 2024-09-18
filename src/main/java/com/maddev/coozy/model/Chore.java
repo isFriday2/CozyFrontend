@@ -16,6 +16,19 @@ public class Chore {
     private LocalDate dueDate;
     private boolean completed;
 
+    /**
+     * Constructs a new Contact with the specified first name, last name, email, and phone number.
+     * @param id The identifier and primary key of chore
+     * @param userId The identifier and primary key of user
+     * @param name The name/ title of the chore
+     * @param description The brief description of what's the chore
+     * @param reward The reward in integer of on a chores completion
+     * @param home The identifier of user's home
+     * @param icon The name of the image on the chores entry
+     * @param  dueDate The due date of the chore
+     * @param completed The status of the chore's completion
+     */
+
 
     // Constructor including all fields
     public Chore(int id, int userId, String name, String description, int reward,
