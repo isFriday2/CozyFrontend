@@ -59,7 +59,7 @@
                 </padding>
             </VBox>
         </HBox>
-        <Hyperlink text="Don't have an account? Register Now" textAlignment="CENTER">
+        <Hyperlink fx:id="registerLink" text="Don't have an account? Register Now" textAlignment="CENTER" onAction="#handleRegisterAction">
             <padding>
                 <Insets bottom="10.0" />
             </padding>

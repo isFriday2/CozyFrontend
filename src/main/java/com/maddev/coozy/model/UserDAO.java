@@ -40,7 +40,7 @@ public class UserDAO {
     }
 
     // Insert new user into db
-    public void insert(User user) {
+    public boolean insert(User user) {
         try {
             PreparedStatement insertUser = connection.prepareStatement(
                     "INSERT INTO Users (username, email, nickname, home, password) VALUES (?, ?, ?, ?, ?)"
@@ -51,8 +51,10 @@ public class UserDAO {
             insertUser.setString(4, user.getHome());
             insertUser.setString(5, user.getPassword());
             insertUser.execute();
+            return true;
         } catch (SQLException ex) {
             System.err.println(ex);
+            return false;
         }
     }
 

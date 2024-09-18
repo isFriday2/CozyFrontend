@@ -20,7 +20,7 @@ public class User {
         this.email = email;
         this.nickname = nickname;
         this.home = home;
-        this.password = hashPassword(password);
+        this.password = password;
     }
 
     // Constructor without id - for auto incrementing
@@ -29,7 +29,7 @@ public class User {
         this.email = email;
         this.nickname = nickname;
         this.home = home;
-        this.password = hashPassword(password);
+        this.password = password;
     }
 
     // Create getter functions

@@ -4,10 +4,7 @@ import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
 import javafx.fxml.FXMLLoader;
@@ -26,6 +23,9 @@ public class LoginController {
 
     @FXML
     private Button loginButton;
+
+    @FXML
+    private Hyperlink registerLink;
 
     // Create an instance of UserDAO to interact with the database
     private UserDAO userDAO = new UserDAO();
@@ -75,9 +75,19 @@ public class LoginController {
     }
 
     @FXML
-    private void handleRegisterLinkAction() {
-        // Handle the button click for register acccount
+    private void handleRegisterAction() {
+        // Handle the button click for register account
         // Open new stage for register form
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/register.fxml"));
+            Parent registerForm = loader.load();
+            Stage stage = (Stage) registerLink.getScene().getWindow();
+            stage.setScene(new Scene(registerForm));
+            stage.setTitle("Register");
+        } catch (IOException e) {
+            e.printStackTrace(); // This will print the stack trace to help diagnose the problem
+            showAlert(AlertType.ERROR, "Error", "Failed to load Registration Form.");
+        }
     }
 
     // Method for showing alerts using Alert
