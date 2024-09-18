@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreItemController">
+<AnchorPane prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreItemController">
    <children>
       <HBox fx:id="hBoxComplete" layoutX="125.0" prefHeight="0.0" prefWidth="0.0" style="-fx-border-color: #a4c3b2; -fx-border-radius: 30; -fx-border-width: 5; -fx-background-radius: 30; -fx-background-color: #cce3de;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <opaqueInsets>
