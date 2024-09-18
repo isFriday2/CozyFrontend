@@ -12,6 +12,16 @@ public class User {
     private String home;
     private String password;
 
+    /**
+     * Constructs a new Contact with the specified first name, last name, email, and phone number.
+     * @param id The identifier and primary key of user
+     * @param username The self-defined username (unique)
+     * @param email The user's registered email
+     * @param nickname The another known name of the user
+     * @param password The registered user password
+     * @param home The identifier of user's home
+     */
+
     // Constructor including all fields
     // Remove and make username PK
     public User(int id, String username, String email, String nickname, String home, String password) {

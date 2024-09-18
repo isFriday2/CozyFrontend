@@ -8,7 +8,11 @@ public class Leaderboard {
     private List<User> users;
     private List<Chore> chores;
     private List<LeaderboardEntry> entries;
-
+    /**
+     * Constructs a new Contact with the specified first name, last name, email, and phone number.
+     * @param users The identifier of user, using userId in user table
+     * @param chores The list of completed chores of the user
+     */
     public Leaderboard(List<User> users, List<Chore> chores) {
         this.users = users;
         this.chores = chores;
@@ -47,10 +51,19 @@ public class Leaderboard {
         return entries;
     }
 
+
+
     public static class LeaderboardEntry {
         private User user;
         private int points;
         private int rank;
+
+
+        /**
+         * Constructs a new Contact with the specified first name, last name, email, and phone number.
+         * @param user The identifier of user, using userId in user table
+         * @param points The accumulated reward of user's completed chore
+         */
 
         public LeaderboardEntry(User user, int points) {
             this.user = user;
