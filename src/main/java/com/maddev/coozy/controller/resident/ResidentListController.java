@@ -34,7 +34,7 @@ public class ResidentListController {
     @FXML
     public void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
         connectToDatabase();
         loadResidentsFromDatabase();
@@ -56,9 +56,9 @@ public class ResidentListController {
         residentList.clear();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM residents");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users");
             while (rs.next()) {
-                residentList.add(new Resident(rs.getInt("id"), rs.getString("name")));
+                residentList.add(new Resident(rs.getInt("id"), rs.getString("username")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +70,7 @@ public class ResidentListController {
         String name = nameField.getText();
 
         try {
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO residents (name) VALUES (?)");
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO Users (username) VALUES (?)");
             stmt.setString(1, name);
             stmt.executeUpdate();
             loadResidentsFromDatabase();
@@ -85,7 +85,7 @@ public class ResidentListController {
 
         String name = nameField.getText();
         try {
-            PreparedStatement stmt = connection.prepareStatement("UPDATE residents SET name = ? WHERE id = ?");
+            PreparedStatement stmt = connection.prepareStatement("UPDATE Users SET name = ? WHERE id = ?");
             stmt.setString(1, name);
             stmt.setInt(4, selectedResident.getId());
             stmt.executeUpdate();
@@ -100,7 +100,7 @@ public class ResidentListController {
         if (selectedResident == null) return;
 
         try {
-            PreparedStatement stmt = connection.prepareStatement("DELETE FROM residents WHERE id = ?");
+            PreparedStatement stmt = connection.prepareStatement("DELETE FROM Users WHERE id = ?");
             stmt.setInt(1, selectedResident.getId());
             stmt.executeUpdate();
             loadResidentsFromDatabase();

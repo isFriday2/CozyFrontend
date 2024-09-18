@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.maddev.coozy.Residentlist"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <?xml version="1.0" encoding="UTF-8"?>
+
+    <?import javafx.scene.control.*?>
+    <?import javafx.scene.layout.*?>
+
+        <TableView fx:id="residentTable">
+            <columns>
+                <TableColumn text="ID" fx:id="idColumn" prefWidth="50"/>
+                <TableColumn text="Name" fx:id="nameColumn" prefWidth="150"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <TextField fx:id="nameField" promptText="Name"/>
+        </HBox>
+
+        <HBox spacing="10">
+            <Button text="Add" fx:id="addButton"/>
+            <Button text="Edit" fx:id="editButton"/>
+            <Button text="Delete" fx:id="deleteButton"/>
+        </HBox>
+    </VBox>
+</AnchorPane>
