@@ -21,7 +21,7 @@
                         <Font name="Arial Rounded MT Bold" size="50.0" />
                      </font>
                   </Label>
-                  <FontAwesomeIconView accessibleRole="BUTTON" glyphName="CALENDAR" layoutX="310.0" layoutY="80.0" size="40" text="" />
+                  <FontAwesomeIconView accessibleRole="BUTTON" glyphName="CALENDAR" layoutX="310.0" layoutY="80.0" size="40" text="" />
                   <FontAwesomeIconView glyphName="BOOK" layoutX="380.0" layoutY="80.0" size="40" />
                   <Label fx:id="date" alignment="TOP_LEFT" layoutX="20.0" layoutY="90.0" prefHeight="38.0" prefWidth="280.0" text="DATE" textFill="#bcbcbc">
                      <font>
@@ -39,13 +39,15 @@
                <children>
                   <Button fx:id="addChore" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAddChore" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #6b9080; -fx-background-radius: 50%;">
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="50" strokeWidth="0.5" text="" textAlignment="CENTER" wrappingWidth="44.371477127075195" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="50" strokeWidth="0.5" text="" textAlignment="CENTER" wrappingWidth="44.371477127075195" />
                      </graphic>
                   </Button>
                </children>
             </AnchorPane>
          </children>
       </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1310.0" visible="false" />
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="300.0">
+         <fx:include fx:id="leaderboard" source="leaderboard.fxml" />
+      </VBox>
    </children>
 </HBox>
