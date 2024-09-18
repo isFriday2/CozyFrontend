@@ -1,0 +1,6 @@
+module:com.maddev.coozy
+com.maddev.coozy
+com.maddev.coozy.controller
+com.maddev.coozy.controller.chore
+com.maddev.coozy.controller.leaderboard
+com.maddev.coozy.model
