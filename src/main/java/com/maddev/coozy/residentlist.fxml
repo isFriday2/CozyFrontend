@@ -32,5 +32,4 @@
             <Button text="Edit" fx:id="editButton"/>
             <Button text="Delete" fx:id="deleteButton"/>
         </HBox>
-    </VBox>
 </AnchorPane>
