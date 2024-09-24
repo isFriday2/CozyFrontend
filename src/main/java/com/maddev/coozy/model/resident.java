@@ -9,8 +9,7 @@ public class resident {
         }
 
         public String getName() {
-            return name;
+            return username;
         }
 
     }
-}

@@ -1,4 +1,4 @@
-ckage com.maddev.coozy.controller.resident;
+package com.maddev.coozy.controller.resident;
 
 import com.maddev.coozy.model.Leaderboard;
 import com.maddev.coozy.model.LeaderboardEntry;
@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -28,7 +31,7 @@ public class ResidentListController {
     @FXML
     private Button deleteButton;
 
-    private ObservableList<Resident> residentList = FXCollections.observableArrayList();
+    private final ObservableList<Object> residentList = FXCollections.observableArrayList();
     private Connection connection;
 
     @FXML
