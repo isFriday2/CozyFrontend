@@ -1,8 +1,15 @@
 package com.maddev.coozy.controller.resident;
 
 import com.maddev.coozy.model.Leaderboard;
-import com.maddev.coozy.model.LeaderboardEntry;
+import com.maddev.coozy.model.Leaderboard.Resident;
+
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +18,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -31,7 +43,7 @@ public class ResidentListController {
     @FXML
     private Button deleteButton;
 
-    private final ObservableList<Object> residentList = FXCollections.observableArrayList();
+    private final ObservableList<Resident> residentList = FXCollections.observableArrayList();
     private Connection connection;
 
     @FXML
