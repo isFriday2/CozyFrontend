@@ -26,6 +26,7 @@ public class ChoreAnchorController {
 
     public void setData(){
         choreAnchor.getChildren().clear();
+
         if(!edit){
             if(chore.isCompleted()){
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -57,6 +58,7 @@ public class ChoreAnchorController {
                 AnchorPane item=fxmlLoader.load();
                 ChoreEditItemController controller = fxmlLoader.getController();
                 controller.setData(chore);
+                controller.setChore(chore);
                 choreAnchor.getChildren().add(item);
             }catch (IOException e){
                 e.printStackTrace();
