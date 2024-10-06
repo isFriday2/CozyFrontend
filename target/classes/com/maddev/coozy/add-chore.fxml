@@ -67,7 +67,7 @@
                         </TextField>
                         <MenuButton fx:id="iconMenuButton" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" prefWidth="120.0" text="Choose icon" textFill="#898989">
                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#setToTrash">
+                              <MenuItem fx:id="trashIcon" mnemonicParsing="false" onAction="#setToTrash">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="TRASH" size="30" />
                                  </graphic>

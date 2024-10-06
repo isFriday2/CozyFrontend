@@ -13,6 +13,16 @@ public class UserDAO {
         connection = DatabaseConnection.getInstance();
         createTable();
     }
+    // Creates DB connection for unit tests
+    public UserDAO(boolean test){
+        if(test){
+            connection = TestDatabaseConnection.getInstance();
+            createTable();
+        }else{
+            connection = DatabaseConnection.getInstance();
+            createTable();
+        }
+    }
 
     //
     // Functions for CRUD with database
@@ -34,6 +44,18 @@ public class UserDAO {
                             + ")"
             );
             System.out.println("table Users created");
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }
+
+    // Erases all users in the db, use it only with the test db
+    public void resetTable(){
+        try {
+            Statement createTable = connection.createStatement();
+            createTable.execute(
+                    "DELETE FROM users"
+            );
         } catch (SQLException ex) {
             System.err.println(ex);
         }

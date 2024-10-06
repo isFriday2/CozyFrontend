@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class ChoreAnchorController {
     private ChoreDAO choreDAO;
+    private boolean testing=false;
     private boolean edit=false;
     private Chore chore;
 
@@ -17,7 +18,13 @@ public class ChoreAnchorController {
         choreDAO= new ChoreDAO();
     }
 
-    public void setChore(Chore chore){
+    // run before init to use the test db
+    public void setTesting(){
+        testing=true;
+        choreDAO=new ChoreDAO(true);
+    }
+
+    public void setChore(Chore chore) {
         this.chore=chore;
     }
 

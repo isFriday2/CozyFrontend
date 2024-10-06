@@ -27,14 +27,14 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-
-        // Create the table
-        UserDAO userDAO = new UserDAO();
-        userDAO.createTable();
-
-        userDAO.close();
-
-    }
+//    public static void main(String[] args) {
+//        launch(args);
+//
+//        // Create the table
+//        UserDAO userDAO = new UserDAO();
+//        userDAO.createTable();
+//
+//        userDAO.close();
+//
+//    }
 }

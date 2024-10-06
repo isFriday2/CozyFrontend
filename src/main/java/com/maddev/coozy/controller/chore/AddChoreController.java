@@ -19,13 +19,20 @@ import java.util.List;
 public class AddChoreController {
     private UserDAO userDAO;
     private ChoreDAO choreDAO;
+    private boolean testing = false;
+    private User user;
 
     public AddChoreController() {
         userDAO= new UserDAO();
         choreDAO= new ChoreDAO();
     }
 
-    private User user;
+    // run before init to use the test db
+    public void setTesting(){
+        testing=true;
+        choreDAO=new ChoreDAO(true);
+        userDAO= new UserDAO(true);
+    }
 
     public void setUser(User user) {
         this.user = user;
@@ -33,6 +40,8 @@ public class AddChoreController {
 
     private String icon;
 
+    @FXML
+    private MenuButton iconMenuButton;
     @FXML
     private TextArea descriptionTextArea;
     @FXML
@@ -101,6 +110,7 @@ public class AddChoreController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));
         Parent root = fxmlLoader.load();
         ChoreViewController controller=fxmlLoader.getController();
+        if(testing) controller.setTesting();
         controller.setUser(user);
         controller.init();
         Scene scene = new Scene(root,1133, 744);
@@ -113,6 +123,7 @@ public class AddChoreController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));
         Parent root = fxmlLoader.load();
         ChoreViewController controller=fxmlLoader.getController();
+        if(testing) controller.setTesting();
         controller.setUser(user);
         controller.init();
         Scene scene = new Scene(root,1133, 744);
