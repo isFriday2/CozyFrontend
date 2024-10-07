@@ -14,6 +14,17 @@ public class UserDAO {
         createTable();
     }
 
+    // Creates DB connection for unit tests
+    public UserDAO(boolean test){
+        if(test){
+            connection = TestDatabaseConnection.getInstance();
+            createTable();
+        }else{
+            connection = DatabaseConnection.getInstance();
+            createTable();
+        }
+    }
+
     //
     // Functions for CRUD with database
     //
@@ -39,8 +50,20 @@ public class UserDAO {
         }
     }
 
+    // Erases all users in the db, use it only with the test db
+    public void resetTable(){
+        try {
+            Statement createTable = connection.createStatement();
+            createTable.execute(
+                    "DELETE FROM users"
+            );
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }
+
     // Insert new user into db
-    public void insert(User user) {
+    public boolean insert(User user) {
         try {
             PreparedStatement insertUser = connection.prepareStatement(
                     "INSERT INTO Users (username, email, nickname, home, password) VALUES (?, ?, ?, ?, ?)"
@@ -51,8 +74,10 @@ public class UserDAO {
             insertUser.setString(4, user.getHome());
             insertUser.setString(5, user.getPassword());
             insertUser.execute();
+            return true;
         } catch (SQLException ex) {
             System.err.println(ex);
+            return false;
         }
     }
 
