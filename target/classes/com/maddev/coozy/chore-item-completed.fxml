@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreItemController">
+<AnchorPane prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreItemController">
    <children>
       <HBox fx:id="hBoxComplete" layoutX="125.0" prefHeight="0.0" prefWidth="0.0" style="-fx-border-color: #a4c3b2; -fx-border-radius: 30; -fx-border-width: 5; -fx-background-radius: 30; -fx-background-color: #cce3de;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <opaqueInsets>
@@ -39,11 +42,14 @@
                               <Insets left="20.0" />
                            </padding>
                         </Label>
-                        <FontIcon iconLiteral="fas-check-circle" iconSize="25">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../image/checked.png" />
+                           </image>
                            <HBox.margin>
-                              <Insets left="5.0" top="5.0" />
+                              <Insets left="25.0" top="5.0" />
                            </HBox.margin>
-                        </FontIcon>
+                        </ImageView>
                      </children>
                   </HBox>
                </children>

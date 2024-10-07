@@ -17,6 +17,24 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>openjfx-monocle</artifactId>
+            <version>17.0.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <version>4.0.18</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <version>4.0.18</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>20</version>
@@ -156,6 +174,23 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
+                <configuration>
+                    <argLine>
+                        --add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+                        --add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+                        --add-exports=javafx.graphics/com.sun.javafx.util=ALL-UNNAMED
+                        --add-opens=javafx.graphics/com.sun.javafx.util=ALL-UNNAMED
+                        --add-exports=javafx.base/com.sun.javafx.logging=ALL-UNNAMED
+                        --add-opens=javafx.base/com.sun.javafx.logging=ALL-UNNAMED
+                        --add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                    </argLine>
+                    <systemPropertyVariables>
+                        <testfx.headless>true</testfx.headless>
+                        <prism.order>sw</prism.order>
+                        <monocle.platform>Headless</monocle.platform>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
