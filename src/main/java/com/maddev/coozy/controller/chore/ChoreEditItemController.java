@@ -2,6 +2,7 @@ package com.maddev.coozy.controller.chore;
 
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
+import com.maddev.coozy.controller.chore.ChoreViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ChoreEditItemController {
+
 
     // Create DB DAO connections
     ChoreDAO choreDAO = new ChoreDAO();
@@ -49,7 +51,7 @@ public class ChoreEditItemController {
                 // Call delete method from ChoreDAO
                 choreDAO.delete(currentChore.getId());
                 System.out.println("Chore deleted successfully");
-                // Optionally refresh the UI or remove the chore from display
+
             } catch (Exception e) {
                 System.err.println("Failed to delete chore: " + e.getMessage());
                 // Show an alert if the delete fails
