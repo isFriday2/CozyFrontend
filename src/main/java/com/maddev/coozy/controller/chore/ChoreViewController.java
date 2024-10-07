@@ -49,8 +49,8 @@ public class ChoreViewController {
         leaderboardController = new LeaderboardController();
 
         System.out.println("Leaderboard Controller init " +  leaderboardController);
-        leaderboardController.setUser(user);
         leaderboardController.initLeaderboard();
+        leaderboardController.displayLeaderboard();
 
     }
 
@@ -72,11 +72,6 @@ public class ChoreViewController {
             }
         }
 
-        // Initialize leaderboard
-        if(leaderboardController != null) {
-            leaderboardController.setUser(user);
-            leaderboardController.initLeaderboard(); // Updated method name
-        }else System.out.println("leaderboardController is" + leaderboardController);
 
     }
 

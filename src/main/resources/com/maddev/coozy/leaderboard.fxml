@@ -21,7 +21,7 @@
                                 <Font name="Arial Rounded MT Bold" size="26.0" />
                             </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="10.0" text="House Member" textFill="#6b8f7f80">
+                        <Label layoutX="10.0" layoutY="10.0" text="Username" textFill="#6b8f7f80">
                             <font>
                                 <Font name="Arial Rounded MT Bold" size="17.0" />
                             </font>

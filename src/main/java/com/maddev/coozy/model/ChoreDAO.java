@@ -145,4 +145,31 @@ public class ChoreDAO {
         }
         return chores;
     }
+    // get all the chores belonging to one user by user id
+    public List<Chore> getAllCompletedByUser(int id) {
+        List<Chore> chores= new ArrayList<>();
+        try {
+            PreparedStatement getChores = connection.prepareStatement("SELECT * FROM chores WHERE user_id = ? AND completed = 1");
+            getChores.setInt(1, id);
+            ResultSet rs = getChores.executeQuery();
+            while (rs.next()) {
+                chores.add(
+                        new Chore(
+                                rs.getInt("id"),
+                                rs.getInt("user_id"),
+                                rs.getString("name"),
+                                rs.getString("description"),
+                                rs.getInt("reward"),
+                                rs.getString("home"),
+                                rs.getString("icon"),
+                                LocalDate.parse(rs.getString("due_date")),
+                                rs.getInt("completed")==1
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return chores;
+    }
 }

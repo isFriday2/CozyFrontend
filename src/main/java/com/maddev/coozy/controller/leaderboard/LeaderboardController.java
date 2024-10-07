@@ -4,65 +4,81 @@ import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.UserDAO;
 import com.maddev.coozy.model.ChoreDAO;
-
+import com.maddev.coozy.model.LeaderboardEntry;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import javafx.scene.shape.Circle;
-import javafx.geometry.Pos;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.stream.Collectors;
+import java.util.*;
+
 
 public class LeaderboardController {
 
-    @FXML
-    private VBox entriesContainer;
-    @FXML
-    private VBox leaderboardContainer;
-
     private UserDAO userDAO;
     private ChoreDAO choreDAO;
-    private User currentUser;
-
+    private List<LeaderboardEntry> leaderboard;
 
     public LeaderboardController() {
-        userDAO = new UserDAO();
-        choreDAO = new ChoreDAO();
+        this.userDAO = new UserDAO();
+        this.choreDAO = new ChoreDAO();
+        this.leaderboard = new ArrayList<>();
 
-        System.out.println("LeaderboardController initialize called");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/leaderboard.fxml"));
-        fxmlLoader.setController(this);
+//        System.out.println("LeaderboardController initialize called");
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/leaderboard.fxml"));
+//        fxmlLoader.setController(this);
+//
+//        try {
+//            leaderboardContainer = fxmlLoader.load();
+//        } catch (IOException e) {
+//            throw new RuntimeException("Failed to load leaderboard.fxml", e);
+//        }
+    }
 
-        try {
-            leaderboardContainer = fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load leaderboard.fxml", e);
+    public void displayLeaderboard() {
+        System.out.println("Leaderboard:");
+        System.out.println("Rank\tUser\t\tTotal Reward");
+        System.out.println("------------------------------------");
+        for (int i = 0; i < leaderboard.size(); i++) {
+            LeaderboardEntry entry = leaderboard.get(i);
+            System.out.printf("%d\t%-15s\t%d%n", i + 1, entry.getUser().getUsername(), entry.getTotalReward());
         }
     }
 
-    public void setUser(User user) {
-        this.currentUser = user;
+    private int calculateTotalReward(List<Chore> chores) {
+        int total = 0;
+        for (Chore chore : chores) {
+            total += chore.getReward();
+        }
+        return total;
     }
 
-    // Renamed from init() to initializeLeaderboard()
     public void initLeaderboard() {
-        updateLeaderboard();
+        List<User> users = userDAO.getAll();
+
+        for (User user : users) {
+            List<Chore> completedChores = choreDAO.getAllCompletedByUser(user.getId());
+            int totalReward = calculateTotalReward(completedChores);
+            leaderboard.add(new LeaderboardEntry(user, totalReward));
+        }
+
+        // Sort the leaderboard by total reward in descending order
+        leaderboard.sort((a, b) -> Integer.compare(b.getTotalReward(), a.getTotalReward()));
+
     }
 
-    private void updateLeaderboard() {
-
+    // Method to get a specific user's rank and total reward
+    public Map<String, Integer> getUserStats(String username) {
+        for (int i = 0; i < leaderboard.size(); i++) {
+            LeaderboardEntry entry = leaderboard.get(i);
+            if (entry.getUser().getUsername().equals(username)) {
+                Map<String, Integer> stats = new HashMap<>();
+                stats.put("rank", i + 1);
+                stats.put("totalReward", entry.getTotalReward());
+                return stats;
+            }
+        }
+        return null; // User not found
     }
 
-    public void refreshLeaderboard() {
-        updateLeaderboard();
-    }
+
 }
