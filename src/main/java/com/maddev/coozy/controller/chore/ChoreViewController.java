@@ -23,14 +23,22 @@ import java.util.*;
 public class ChoreViewController {
     private UserDAO userDAO;
     private ChoreDAO choreDAO;
+    private boolean testing=false;
 
     public ChoreViewController() {
         userDAO = new UserDAO();
         choreDAO = new ChoreDAO();
     }
 
+    // run before init to use the test db
+    public void setTesting(){
+        testing=true;
+        userDAO=new UserDAO(true);
+        choreDAO=new ChoreDAO(true);
+    }
+
     private User user;
-    public void setUser(User user) {
+    public void setUser(User user){
         this.user = user;
     }
 
@@ -79,6 +87,7 @@ public class ChoreViewController {
             try {
                 AnchorPane anchorPane = fxmlLoader.load();
                 ChoreAnchorController controller = fxmlLoader.getController();
+                if(testing) controller.setTesting();
                 controller.setChore(chore);
                 controller.setData();
                 choresLayout.getChildren().add(anchorPane);
@@ -105,7 +114,9 @@ public class ChoreViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("add-chore.fxml"));
         Parent root = fxmlLoader.load();
         AddChoreController controller = fxmlLoader.getController();
+        if(testing) controller.setTesting();
         controller.setUser(user);
+        controller.setChoiceUsernames();
         Scene scene = new Scene(root, 600, 400);
         stage.setScene(scene);
     }
