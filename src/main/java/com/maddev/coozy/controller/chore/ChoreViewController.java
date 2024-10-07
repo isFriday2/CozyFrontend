@@ -52,21 +52,6 @@ public class ChoreViewController {
         leaderboardController.setUser(user);
         leaderboardController.initLeaderboard();
 
-
-//        System.out.println("ChoreViewController initialize called");
-//        System.out.println("leaderboard VBox: " + (leaderboard == null ? "null" : "not null"));
-//        if (leaderboard != null) {
-//            System.out.println("leaderboard VBox properties: " + leaderboard.getProperties());
-//
-//            System.out.println("Controller object: " + (controller == null ? "null" : controller.getClass().getName()));
-//
-//        } else {
-//            System.err.println("leaderboard VBox is null");
-//        }
-//        System.out.println("LeaderboardController: " + (leaderboardController == null ? "null" : "not null"));
-//        if (leaderboardController == null) {
-//            System.err.println("LeaderboardController could not be retrieved from the included FXML.");
-//        }
     }
 
     // always call this function to load page but after setting a user for the controller
