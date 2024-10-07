@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="leaderboardContainer" xmlns:fx="http://javafx.com/fxml/1" >
-    <Label text="Leaderboard" styleClass="leaderboard-title"/>
-    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
-        <VBox fx:id="entriesContainer" spacing="10" styleClass="leaderboard-entries"/>
+<VBox fx:id="leaderboardContainer" style="-fx-padding: 30; -fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.leaderboard.LeaderboardController">
+    <Label alignment="TOP_LEFT" styleClass="leaderboard-title" text="Leaderboard">
+        <font>
+            <Font name="Arial Rounded MT Bold" size="38.0" />
+        </font></Label>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="470.0" prefWidth="470.0" style="-fx-background-color: #FFF; -fx-padding: 15;">
+        <BorderPane prefHeight="81.0" prefWidth="407.0" style="-fx-background-color: #CCE3DE; -fx-background-radius: 25; -fx-padding: 15;">
+            <left>
+                <VBox prefHeight="71.0" prefWidth="263.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label text="Goldy" textFill="#6b9080">
+                            <font>
+                                <Font name="Arial Rounded MT Bold" size="26.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" text="Username" textFill="#6b8f7f80">
+                            <font>
+                                <Font name="Arial Rounded MT Bold" size="17.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            </left>
+            <right>
+                <Label text="100 points" textFill="#6b9080" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                    </font>
+                </Label>
+            </right>
+        </BorderPane>
     </ScrollPane>
 </VBox>

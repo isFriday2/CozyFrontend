@@ -46,7 +46,7 @@
             </AnchorPane>
          </children>
       </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="300.0">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="470.0">
          <fx:include fx:id="leaderboard" source="leaderboard.fxml" />
       </VBox>
    </children>
