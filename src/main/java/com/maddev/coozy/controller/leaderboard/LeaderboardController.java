@@ -6,9 +6,6 @@ import com.maddev.coozy.model.UserDAO;
 import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.model.LeaderboardEntry;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-
-import java.io.IOException;
 import java.util.*;
 
 
@@ -22,16 +19,23 @@ public class LeaderboardController {
         this.userDAO = new UserDAO();
         this.choreDAO = new ChoreDAO();
         this.leaderboard = new ArrayList<>();
+    }
 
-//        System.out.println("LeaderboardController initialize called");
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/leaderboard.fxml"));
-//        fxmlLoader.setController(this);
-//
-//        try {
-//            leaderboardContainer = fxmlLoader.load();
-//        } catch (IOException e) {
-//            throw new RuntimeException("Failed to load leaderboard.fxml", e);
-//        }
+    @FXML
+    public void initialize() {
+        List<User> users = userDAO.getAll();
+
+        for (User user : users) {
+            List<Chore> completedChores = choreDAO.getAllCompletedByUser(user.getId());
+            int totalReward = calculateTotalReward(completedChores);
+            leaderboard.add(new LeaderboardEntry(user, totalReward));
+        }
+
+        // Sort the leaderboard by total reward in descending order
+        leaderboard.sort((a, b) -> Integer.compare(b.getTotalReward(), a.getTotalReward()));
+
+        this.displayLeaderboard();
+
     }
 
     public void displayLeaderboard() {
@@ -50,20 +54,6 @@ public class LeaderboardController {
             total += chore.getReward();
         }
         return total;
-    }
-
-    public void initLeaderboard() {
-        List<User> users = userDAO.getAll();
-
-        for (User user : users) {
-            List<Chore> completedChores = choreDAO.getAllCompletedByUser(user.getId());
-            int totalReward = calculateTotalReward(completedChores);
-            leaderboard.add(new LeaderboardEntry(user, totalReward));
-        }
-
-        // Sort the leaderboard by total reward in descending order
-        leaderboard.sort((a, b) -> Integer.compare(b.getTotalReward(), a.getTotalReward()));
-
     }
 
     // Method to get a specific user's rank and total reward

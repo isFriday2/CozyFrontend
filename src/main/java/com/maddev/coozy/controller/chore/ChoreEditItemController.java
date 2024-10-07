@@ -16,10 +16,16 @@ public class ChoreEditItemController {
 
 
     // Create DB DAO connections
-    ChoreDAO choreDAO = new ChoreDAO();
+    private ChoreDAO choreDAO = new ChoreDAO();
 
     private Chore currentChore;
+    private boolean testing=false;
 
+    // run before init to use the test db
+    public void setTesting(){
+        testing=true;
+        choreDAO=new ChoreDAO(true);
+    }
     // Set the current chore for editing
     public void setChore(Chore chore) {
         this.currentChore = chore;

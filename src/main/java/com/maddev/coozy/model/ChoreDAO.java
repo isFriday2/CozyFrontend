@@ -14,6 +14,17 @@ public class ChoreDAO {
         createTable();
     }
 
+    // Creates DB connection for unit tests
+    public ChoreDAO(boolean test){
+        if(test){
+            connection = TestDatabaseConnection.getInstance();
+            createTable();
+        }else{
+            connection = DatabaseConnection.getInstance();
+            createTable();
+        }
+    }
+
     // Create table in db
     // Will not create table if already exists
     public void createTable() {
@@ -32,6 +43,18 @@ public class ChoreDAO {
                             + "completed INT"
 //                            + "FOREIGN KEY(userId) REFERENCES Users(id)"
                             + ")"
+            );
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }
+
+    // Erases all chores in the db, use it only with the test db
+    public void resetTable(){
+        try {
+            Statement createTable = connection.createStatement();
+            createTable.execute(
+                    "DELETE FROM chores"
             );
         } catch (SQLException ex) {
             System.err.println(ex);
@@ -145,7 +168,7 @@ public class ChoreDAO {
         }
         return chores;
     }
-    // get all the chores belonging to one user by user id
+
     public List<Chore> getAllCompletedByUser(int id) {
         List<Chore> chores= new ArrayList<>();
         try {

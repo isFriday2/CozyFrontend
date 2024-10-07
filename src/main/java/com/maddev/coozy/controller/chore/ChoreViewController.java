@@ -23,14 +23,22 @@ import java.util.*;
 public class ChoreViewController {
     private UserDAO userDAO;
     private ChoreDAO choreDAO;
+    private boolean testing=false;
 
     public ChoreViewController() {
         userDAO = new UserDAO();
         choreDAO = new ChoreDAO();
     }
 
+    // run before init to use the test db
+    public void setTesting(){
+        testing=true;
+        userDAO=new UserDAO(true);
+        choreDAO=new ChoreDAO(true);
+    }
+
     private User user;
-    public void setUser(User user) {
+    public void setUser(User user){
         this.user = user;
     }
 
@@ -40,19 +48,8 @@ public class ChoreViewController {
     private Button addChore;
     @FXML
     private Label date;
-    @FXML
-    private VBox leaderboard;
-    private LeaderboardController leaderboardController;
 
-    public void initialize() {
 
-        leaderboardController = new LeaderboardController();
-
-        System.out.println("Leaderboard Controller init " +  leaderboardController);
-        leaderboardController.initLeaderboard();
-        leaderboardController.displayLeaderboard();
-
-    }
 
     // always call this function to load page but after setting a user for the controller
     public void init() {
@@ -64,6 +61,7 @@ public class ChoreViewController {
             try {
                 AnchorPane anchorPane = fxmlLoader.load();
                 ChoreAnchorController controller = fxmlLoader.getController();
+                if(testing) controller.setTesting();
                 controller.setChore(chore);
                 controller.setData();
                 choresLayout.getChildren().add(anchorPane);
@@ -71,7 +69,6 @@ public class ChoreViewController {
                 e.printStackTrace();
             }
         }
-
 
     }
 
@@ -85,7 +82,9 @@ public class ChoreViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("add-chore.fxml"));
         Parent root = fxmlLoader.load();
         AddChoreController controller = fxmlLoader.getController();
+        if(testing) controller.setTesting();
         controller.setUser(user);
+        controller.setChoiceUsernames();
         Scene scene = new Scene(root, 600, 400);
         stage.setScene(scene);
     }

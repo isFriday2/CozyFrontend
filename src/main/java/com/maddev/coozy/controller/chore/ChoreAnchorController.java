@@ -10,11 +10,18 @@ import java.io.IOException;
 
 public class ChoreAnchorController {
     private ChoreDAO choreDAO;
+    private boolean testing=false;
     private boolean edit=false;
     private Chore chore;
 
     public ChoreAnchorController(){
         choreDAO= new ChoreDAO();
+    }
+
+    // run before init to use the test db
+    public void setTesting(){
+        testing=true;
+        choreDAO=new ChoreDAO(true);
     }
 
     public void setChore(Chore chore){
@@ -57,6 +64,7 @@ public class ChoreAnchorController {
             try{
                 AnchorPane item=fxmlLoader.load();
                 ChoreEditItemController controller = fxmlLoader.getController();
+                controller.setTesting();
                 controller.setData(chore);
                 controller.setChore(chore);
                 choreAnchor.getChildren().add(item);
@@ -66,11 +74,9 @@ public class ChoreAnchorController {
         }
         choreAnchor.setOnMouseClicked(event ->
         {
-            if (event.getButton() == MouseButton.PRIMARY)
-            {
+            if (event.getButton() == MouseButton.PRIMARY) {
                 onLeftClick();
-            } else if (event.getButton() == MouseButton.SECONDARY)
-            {
+            } else if (event.getButton() == MouseButton.SECONDARY) {
                 onRightClick();
             }
         });
