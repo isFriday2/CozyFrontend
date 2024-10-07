@@ -40,12 +40,12 @@
                   <Insets top="15.0" />
                </HBox.margin>
             </FontIcon>
-            <FontIcon iconLiteral="fas-info-circle" iconSize="35" tabSize="0">
+            <FontIcon fx:id="infoIcon" iconLiteral="fas-info-circle" iconSize="35" tabSize="0">
                <HBox.margin>
                   <Insets left="15.0" top="15.0" />
                </HBox.margin>
             </FontIcon>
-            <FontIcon iconLiteral="far-trash-alt" iconSize="35">
+            <FontIcon fx:id="deleteIcon" onMouseClicked="#handleDeleteIcon" iconLiteral="far-trash-alt" iconSize="35">
                <HBox.margin>
                   <Insets left="15.0" top="15.0" />
                </HBox.margin>
