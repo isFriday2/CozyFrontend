@@ -69,7 +69,7 @@
                           <items>
                               <MenuItem mnemonicParsing="false" onAction="#setToTrash">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="TRASH" size="30" />
+                                    <FontAwesomeIconView fx:id="trashIcon" glyphName="TRASH" size="30" />
                                  </graphic>
                               </MenuItem>
                               <MenuItem mnemonicParsing="false" onAction="#setToHome">

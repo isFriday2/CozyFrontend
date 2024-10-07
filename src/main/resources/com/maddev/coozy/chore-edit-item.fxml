@@ -2,11 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <AnchorPane prefHeight="100.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreEditItemController">
    <children>
@@ -35,21 +36,22 @@
                   </Label>
                </children>
             </VBox>
-            <FontIcon iconLiteral="far-handshake" iconSize="35">
+            <ImageView fx:id="infoIcon" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/information.png" />
+               </image>
                <HBox.margin>
-                  <Insets top="15.0" />
+                  <Insets left="60.0" top="15.0" />
                </HBox.margin>
-            </FontIcon>
-            <FontIcon fx:id="infoIcon" iconLiteral="fas-info-circle" iconSize="35" tabSize="0">
+            </ImageView>
+            <ImageView fx:id="deleteIcon" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/trash-can.png" />
+               </image>
                <HBox.margin>
-                  <Insets left="15.0" top="15.0" />
+                  <Insets bottom="15.0" left="15.0" right="30.0" top="15.0" />
                </HBox.margin>
-            </FontIcon>
-            <FontIcon fx:id="deleteIcon" onMouseClicked="#handleDeleteIcon" iconLiteral="far-trash-alt" iconSize="35">
-               <HBox.margin>
-                  <Insets left="15.0" top="15.0" />
-               </HBox.margin>
-            </FontIcon>
+            </ImageView>
          </children>
       </HBox>
    </children>
