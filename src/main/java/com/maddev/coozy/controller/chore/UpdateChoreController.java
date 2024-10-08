@@ -39,31 +39,6 @@ public class UpdateChoreController {
     private Button cancelButton;
 
     @FXML
-    private void setToTrash(){
-        icon="TRASH";
-    }
-    @FXML
-    private void setToHome(){
-        icon="HOME";
-    }
-    @FXML
-    private void setToShoppingCart(){
-        icon="SHOPPING_CART";
-    }
-    @FXML
-    private void setToPaw(){
-        icon="PAW";
-    }
-    @FXML
-    private void setToCutlery(){
-        icon="CUTLERY";
-    }
-    @FXML
-    private void setToShower(){
-        icon="SHOWER";
-    }
-
-    @FXML
     private void handleUpdateButton() {
         try {
             String description = descriptionTextArea.getText();
@@ -118,20 +93,8 @@ public class UpdateChoreController {
     }
 
     private void redirectToHome() {
-        try {
-            // Load login.fxml
-            Parent root = FXMLLoader.load(getClass().getResource("/com/maddev/coozy/home-page.fxml"));
-
-            // Create a new stage for the login screen
-            Stage homeStage = new Stage();
-            homeStage.setTitle("Home Page");
-            homeStage.setScene(new Scene(root, 600, 400)); // Set the size if needed
-            homeStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load login screen.");
-        }
+            Stage stage = (Stage) cancelButton.getScene().getWindow();
+            stage.close();
     }
 
 

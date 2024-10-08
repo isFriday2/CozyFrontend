@@ -59,32 +59,32 @@
                                 </TextField>
                                 <MenuButton fx:id="iconMenuButton" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" prefWidth="120.0" text="Choose icon" textFill="#898989">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#setToTrash">
+                                        <MenuItem mnemonicParsing="false">
                                             <graphic>
                                                 <FontAwesomeIconView fx:id="trashIcon" glyphName="TRASH" size="30" />
                                             </graphic>
                                         </MenuItem>
-                                        <MenuItem mnemonicParsing="false" onAction="#setToHome">
+                                        <MenuItem mnemonicParsing="false">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="HOME" size="30" />
                                             </graphic>
                                         </MenuItem>
-                                        <MenuItem mnemonicParsing="false" onAction="#setToShoppingCart">
+                                        <MenuItem mnemonicParsing="false">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="SHOPPING_CART" size="30" />
                                             </graphic>
                                         </MenuItem>
-                                        <MenuItem mnemonicParsing="false" onAction="#setToPaw">
+                                        <MenuItem mnemonicParsing="false">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="PAW" size="30" />
                                             </graphic>
                                         </MenuItem>
-                                        <MenuItem mnemonicParsing="false" onAction="#setToCutlery">
+                                        <MenuItem mnemonicParsing="false">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="CUTLERY" size="30" />
                                             </graphic>
                                         </MenuItem>
-                                        <MenuItem mnemonicParsing="false" onAction="#setToShower">
+                                        <MenuItem mnemonicParsing="false">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="SHOWER" size="30" />
                                             </graphic>

@@ -76,6 +76,7 @@ public class ChoreEditItemController {
     @FXML
     private void handleInfoIcon() {
         try {
+
             Parent root = FXMLLoader.load(getClass().getResource("/com/maddev/coozy/update-chore.fxml"));
 
             // Create a new stage for the login screen
