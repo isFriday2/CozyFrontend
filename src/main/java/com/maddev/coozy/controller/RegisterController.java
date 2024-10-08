@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.Modality;
+
 
 import java.io.IOException;
 
@@ -82,7 +84,7 @@ public class RegisterController {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
-        alert.show();
+        alert.showAndWait();  // This makes it modal and waits for user interaction
     }
 
     @FXML
