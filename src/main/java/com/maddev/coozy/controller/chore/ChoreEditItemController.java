@@ -19,6 +19,7 @@ public class ChoreEditItemController {
     private ChoreDAO choreDAO = new ChoreDAO();
 
     private Chore currentChore;
+
     private boolean testing=false;
 
     // run before init to use the test db
@@ -29,6 +30,7 @@ public class ChoreEditItemController {
     // Set the current chore for editing
     public void setChore(Chore chore) {
         this.currentChore = chore;
+
         this.choreTitle.setText(chore.getName());
     }
 

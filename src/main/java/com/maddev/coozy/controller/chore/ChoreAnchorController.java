@@ -66,7 +66,6 @@ public class ChoreAnchorController {
                 ChoreEditItemController controller = fxmlLoader.getController();
                 controller.setTesting();
                 controller.setData(chore);
-                controller.setChore(chore);
                 choreAnchor.getChildren().add(item);
             }catch (IOException e){
                 e.printStackTrace();
