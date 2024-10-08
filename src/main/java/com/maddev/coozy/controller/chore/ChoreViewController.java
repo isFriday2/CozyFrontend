@@ -53,6 +53,9 @@ public class ChoreViewController {
 
     // always call this function to load page but after setting a user for the controller
     public void init() {
+        System.out.println("Creating chores list");
+        choresLayout.getChildren().clear();
+        choresLayout.getChildren().removeAll();
         date.setText(LocalDate.now().toString());
         List<Chore> chores = new ArrayList<>(getChores());
         for (Chore chore : chores) {
@@ -62,7 +65,7 @@ public class ChoreViewController {
                 AnchorPane anchorPane = fxmlLoader.load();
                 ChoreAnchorController controller = fxmlLoader.getController();
                 if(testing) controller.setTesting();
-                controller.setChore(chore);
+                controller.setChore(chore, this);
                 controller.setData();
                 choresLayout.getChildren().add(anchorPane);
             } catch (IOException e) {
