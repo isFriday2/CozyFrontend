@@ -36,7 +36,7 @@
                   </Label>
                </children>
             </VBox>
-            <ImageView fx:id="infoIcon" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="infoIcon" onMouseClicked="#handleInfoIcon" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../image/information.png" />
                </image>

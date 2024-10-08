@@ -99,4 +99,8 @@ public class LoginController {
         alert.showAndWait();
     }
 
+    private void reloadHome() {
+
+    }
+
 }

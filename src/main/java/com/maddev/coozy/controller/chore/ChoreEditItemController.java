@@ -4,10 +4,15 @@ import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.controller.chore.ChoreViewController;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -65,6 +70,23 @@ public class ChoreEditItemController {
                 // Show an alert if the delete fails
                 showAlert("Error", "Failed to delete the chore. Please try again.");
             }
+        }
+    }
+
+    @FXML
+    private void handleInfoIcon() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/maddev/coozy/update-chore.fxml"));
+
+            // Create a new stage for the login screen
+            Stage updateStage = new Stage();
+            updateStage.setTitle("Update Chore");
+            updateStage.setScene(new Scene(root, 600, 400)); // Set the size if needed
+            updateStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load the chore details. Please try again later.");
         }
     }
 
