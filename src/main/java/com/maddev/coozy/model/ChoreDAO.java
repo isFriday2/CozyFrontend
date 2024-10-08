@@ -109,6 +109,7 @@ public class ChoreDAO {
             PreparedStatement deleteChore = connection.prepareStatement("DELETE FROM chores WHERE id = ?");
             deleteChore.setInt(1, id);
             deleteChore.execute();
+
         } catch (SQLException ex) {
             System.err.println(ex);
         }
