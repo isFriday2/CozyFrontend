@@ -5,7 +5,6 @@ import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.model.UserDAO;
-import com.maddev.coozy.controller.leaderboard.LeaderboardController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,19 +20,17 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class ChoreViewController {
-    private UserDAO userDAO;
     private ChoreDAO choreDAO;
+    private boolean pending=false;
     private boolean testing=false;
 
     public ChoreViewController() {
-        userDAO = new UserDAO();
         choreDAO = new ChoreDAO();
     }
 
     // run before init to use the test db
     public void setTesting(){
         testing=true;
-        userDAO=new UserDAO(true);
         choreDAO=new ChoreDAO(true);
     }
 
@@ -53,8 +50,11 @@ public class ChoreViewController {
 
     // always call this function to load page but after setting a user for the controller
     public void init() {
+        System.out.println("Creating chores list");
+        choresLayout.getChildren().clear();
+        choresLayout.getChildren().removeAll();
         date.setText(LocalDate.now().toString());
-        List<Chore> chores = new ArrayList<>(getChores());
+        List<Chore> chores = new ArrayList<>(getChores(pending));
         for (Chore chore : chores) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/com/maddev/coozy/chore-anchor.fxml"));
@@ -62,7 +62,7 @@ public class ChoreViewController {
                 AnchorPane anchorPane = fxmlLoader.load();
                 ChoreAnchorController controller = fxmlLoader.getController();
                 if(testing) controller.setTesting();
-                controller.setChore(chore);
+                controller.setChore(chore, this);
                 controller.setData();
                 choresLayout.getChildren().add(anchorPane);
             } catch (IOException e) {
@@ -72,8 +72,15 @@ public class ChoreViewController {
 
     }
 
-    private List<Chore> getChores() {
-        return choreDAO.getAllByUser(user.getId());
+    private List<Chore> getChores(boolean pending) {
+        if(!pending) return choreDAO.getAllByUser(user.getId());
+        else return choreDAO.getAllPendingByUser(user.getId());
+    }
+
+    @FXML
+    public void onViewPending(){
+        pending=!pending;
+        init();
     }
 
     @FXML
