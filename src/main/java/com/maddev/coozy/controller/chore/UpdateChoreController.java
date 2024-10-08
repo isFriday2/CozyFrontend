@@ -85,7 +85,7 @@ public class UpdateChoreController {
         dueDatePicker.setValue(currentChore.getDueDate());
     }
 
-    public void showAlert(javafx.scene.control.Alert.AlertType alertType, String title, String message) {
+    private void showAlert(javafx.scene.control.Alert.AlertType alertType, String title, String message) {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
