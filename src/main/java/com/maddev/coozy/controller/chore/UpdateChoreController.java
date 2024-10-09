@@ -1,5 +1,6 @@
 package com.maddev.coozy.controller.chore;
 
+import com.maddev.coozy.AlertUtil;
 import com.maddev.coozy.controller.RegisterController;
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
@@ -63,13 +64,15 @@ public class UpdateChoreController {
             currentChore.setDueDate(date);
 
             choreDAO.update(currentChore);
-            showAlert(Alert.AlertType.INFORMATION, "Update Successful!", "New chore details have now been saved");
+            AlertUtil.showAlert(Alert.AlertType.INFORMATION, "Update Successful", "New Chore details have been saved.");
+
 
             // Redirect after alert has been closed
             redirectToHome();
         } catch (Exception e) {
             // Handle any other exceptions that may occur
-            showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while updating the chore.");
+            AlertUtil.showAlert(Alert.AlertType.ERROR, "Update Error", "Could not update chore at this time.");
+
             e.printStackTrace();
         }
     }
@@ -92,13 +95,6 @@ public class UpdateChoreController {
         // Username.setValue(currentUser.getUsername());
         pointsTextField.setText(String.valueOf(currentChore.getReward())); // Convert to String
         dueDatePicker.setValue(currentChore.getDueDate());
-    }
-
-    private void showAlert(javafx.scene.control.Alert.AlertType alertType, String title, String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(alertType);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();  // This makes it modal and waits for user interaction
     }
 
     private void redirectToHome() {

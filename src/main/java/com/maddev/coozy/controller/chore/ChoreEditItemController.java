@@ -1,5 +1,6 @@
 package com.maddev.coozy.controller.chore;
 
+import com.maddev.coozy.AlertUtil;
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.controller.chore.ChoreViewController;
@@ -69,7 +70,8 @@ public class ChoreEditItemController {
             } catch (Exception e) {
                 System.err.println("Failed to delete chore: " + e.getMessage());
                 // Show an alert if the delete fails
-                showAlert("Error", "Failed to delete the chore. Please try again.");
+                AlertUtil.showAlert(Alert.AlertType.ERROR, "Failed to Delete Chore", "Failed to delete chore. Please try again later.");
+
             }
         }
     }
@@ -90,7 +92,8 @@ public class ChoreEditItemController {
 
         } catch (IOException e) {
             e.printStackTrace(); // This will print the stack trace to help diagnose the problem
-            showAlert("Error", "Failed to load Update Form.");
+            AlertUtil.showAlert(Alert.AlertType.ERROR, "Load Error", "Could not load update form at this time.");
+
         }
     }
 
@@ -102,13 +105,5 @@ public class ChoreEditItemController {
         alert.setHeaderText("Are you sure you want to delete this chore?");
         alert.setContentText("This action cannot be undone.");
         return alert.showAndWait().orElse(null) == ButtonType.OK;
-    }
-
-    // Function to create Alert
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

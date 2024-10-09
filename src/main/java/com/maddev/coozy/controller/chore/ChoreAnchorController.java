@@ -92,17 +92,4 @@ public class ChoreAnchorController {
         choreDAO.update(chore);
         setData();
     }
-
-    private void openUpdateChorePage() {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/maddev/coozy/update-chore-item.fxml"));
-        try {
-            AnchorPane updateChorePane = fxmlLoader.load();
-            UpdateChoreController controller = fxmlLoader.getController();
-            controller.setChore(chore); // Pass the current chore to the update controller
-            choreAnchor.getChildren().setAll(updateChorePane); // Load the update view
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

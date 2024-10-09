@@ -1,4 +1,5 @@
 package com.maddev.coozy.controller;
+import com.maddev.coozy.AlertUtil;
 import com.maddev.coozy.controller.chore.ChoreViewController;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
@@ -58,19 +59,18 @@ public class LoginController {
                     stage.setTitle("Home");
                 } catch (IOException e) {
                     e.printStackTrace(); // This will print the stack trace to help diagnose the problem
-                    showAlert(AlertType.ERROR, "Error", "Failed to load home page.");
+                    AlertUtil.showAlert(Alert.AlertType.ERROR, "Error", "An error occured while loading the home page. Please try again.");
+
                 }
 
 
             } else {
                 // Incorrect Login
-                showAlert(AlertType.ERROR, "Login Failed", "Incorrect Password");
-
+                AlertUtil.showAlert(Alert.AlertType.ERROR, "Login Failed", "Check you details and Try Again.");
             }
         } else {
             // User not found
-            showAlert(AlertType.ERROR, "Incorrect Details", "User not found.");
-
+            AlertUtil.showAlert(Alert.AlertType.ERROR, "Incorrect Details", "User not found.");
         }
     }
 
@@ -86,21 +86,10 @@ public class LoginController {
             stage.setTitle("Register");
         } catch (IOException e) {
             e.printStackTrace(); // This will print the stack trace to help diagnose the problem
-            showAlert(AlertType.ERROR, "Error", "Failed to load Registration Form.");
+            AlertUtil.showAlert(Alert.AlertType.ERROR, "Error", "Failed to Load Registration Form");
+
         }
     }
 
-    // Method for showing alerts using Alert
-    private void showAlert(AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private void reloadHome() {
-
-    }
 
 }

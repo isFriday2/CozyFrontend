@@ -1,5 +1,6 @@
 package com.maddev.coozy.controller.chore;
 
+import com.maddev.coozy.AlertUtil;
 import com.maddev.coozy.HelloApplication;
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
@@ -102,6 +103,9 @@ public class AddChoreController {
 
         Chore newChore = new Chore(userId, name, description, reward, home, icon, dueDate, false);
         choreDAO.insert(newChore);
+
+        AlertUtil.showAlert(Alert.AlertType.INFORMATION, "Chore Added", "Chore has been successfully added!");
+
 
         Stage stage = (Stage) addButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));

@@ -1,6 +1,7 @@
 package com.maddev.coozy.controller;
 
 
+import com.maddev.coozy.AlertUtil;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXML;
@@ -55,7 +56,8 @@ public class RegisterController {
 
         // Mandatory Inputs
         if (username.isEmpty() || nickname.isEmpty() || email.isEmpty() || home.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Uh oh!", "Please fill in all fields.");
+            AlertUtil.showAlert(Alert.AlertType.ERROR, "Empty Fields", "Please fill in all fields and try again");
+
             return;
         }
 
@@ -66,7 +68,8 @@ public class RegisterController {
 
         // Add new user to DB using new object - complete check in same step
         if (isUserAdded) { // If new user insert boolean output true
-            showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "User registered successfully.");
+            AlertUtil.showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "You have successfully registerd!");
+
             //Redirect to Login
             // Get the current stage
             Stage currentStage = (Stage) registerButton.getScene().getWindow();
@@ -74,17 +77,10 @@ public class RegisterController {
             redirectToLogin();
 
         } else { // If new user insert boolean output false
-            showAlert(Alert.AlertType.ERROR, "Registration Failed!", "There was an error registering the user.");
+            AlertUtil.showAlert(Alert.AlertType.ERROR, "Registration Failed", "Could not register the user at this time.");
+
         }
 
-    }
-
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();  // This makes it modal and waits for user interaction
     }
 
     @FXML
@@ -108,7 +104,8 @@ public class RegisterController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load login screen.");
+            AlertUtil.showAlert(Alert.AlertType.ERROR, "Login Error", "Failed to load login screen.");
+
         }
     }
 }
