@@ -14,6 +14,8 @@ public class ChoreAnchorController {
     private boolean edit=false;
     private Chore chore;
 
+    private ChoreViewController parentController;
+
     public ChoreAnchorController(){
         choreDAO= new ChoreDAO();
     }
@@ -24,8 +26,9 @@ public class ChoreAnchorController {
         choreDAO=new ChoreDAO(true);
     }
 
-    public void setChore(Chore chore){
+    public void setChore(Chore chore, ChoreViewController parentController){
         this.chore=chore;
+        this.parentController=parentController;
     }
 
     @FXML
@@ -33,7 +36,6 @@ public class ChoreAnchorController {
 
     public void setData(){
         choreAnchor.getChildren().clear();
-
         if(!edit){
             if(chore.isCompleted()){
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -64,9 +66,8 @@ public class ChoreAnchorController {
             try{
                 AnchorPane item=fxmlLoader.load();
                 ChoreEditItemController controller = fxmlLoader.getController();
-                controller.setTesting();
-                controller.setData(chore);
-                controller.setChore(chore);
+                if(testing) controller.setTesting();
+                controller.setData(chore, parentController);
                 choreAnchor.getChildren().add(item);
             }catch (IOException e){
                 e.printStackTrace();
