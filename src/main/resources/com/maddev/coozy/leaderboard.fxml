@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="leaderboardContainer" style="-fx-padding: 30; -fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.leaderboard.LeaderboardController">
+<VBox fx:id="leaderboardContainer" style="-fx-padding: 30; -fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.leaderboard.LeaderboardController">
     <Label alignment="TOP_LEFT" styleClass="leaderboard-title" text="Leaderboard">
         <font>
             <Font name="Arial Rounded MT Bold" size="38.0" />
