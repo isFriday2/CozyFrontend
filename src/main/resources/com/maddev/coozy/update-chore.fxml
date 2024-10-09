@@ -47,7 +47,7 @@
                                         <Insets left="40.0" right="40.0" top="30.0" />
                                     </VBox.margin>
                                 </TextField>
-                                <ChoiceBox fx:id="chooseUsername" prefHeight="26.0" prefWidth="120.0">
+                                <ChoiceBox fx:id="Username" prefHeight="26.0" prefWidth="120.0">
                                     <VBox.margin>
                                         <Insets left="40.0" right="40.0" top="30.0" />
                                     </VBox.margin>

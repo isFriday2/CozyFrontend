@@ -65,6 +65,7 @@ public class ChoreAnchorController {
                 AnchorPane item=fxmlLoader.load();
                 ChoreEditItemController controller = fxmlLoader.getController();
                 controller.setTesting();
+                controller.setChore(chore);
                 controller.setData(chore);
                 choreAnchor.getChildren().add(item);
             }catch (IOException e){

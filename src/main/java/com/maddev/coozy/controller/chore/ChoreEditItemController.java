@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -76,18 +77,20 @@ public class ChoreEditItemController {
     @FXML
     private void handleInfoIcon() {
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/update-chore.fxml"));
+            Parent root = loader.load();
 
-            Parent root = FXMLLoader.load(getClass().getResource("/com/maddev/coozy/update-chore.fxml"));
+            UpdateChoreController updateChoreController = loader.getController();
+            updateChoreController.setChore(currentChore);
 
-            // Create a new stage for the login screen
             Stage updateStage = new Stage();
             updateStage.setTitle("Update Chore");
-            updateStage.setScene(new Scene(root, 600, 400)); // Set the size if needed
+            updateStage.setScene(new Scene(root, 600, 400)); // Set the size of the window
             updateStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load the chore details. Please try again later.");
+            e.printStackTrace(); // This will print the stack trace to help diagnose the problem
+            showAlert("Error", "Failed to load Update Form.");
         }
     }
 

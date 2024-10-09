@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 public class UpdateChoreController {
     private ChoreDAO choreDAO = new ChoreDAO();
@@ -37,6 +38,14 @@ public class UpdateChoreController {
     private Button updateButton;
     @FXML
     private Button cancelButton;
+
+    public void setChoiceUsernames(){
+        Username.setValue("Assign chore");
+        List<User> possibleUsers=userDAO.getAllByHome(currentUser.getHome());
+        for(User possibleUser: possibleUsers){
+            Username.getItems().add(possibleUser.getUsername());
+        }
+    }
 
     @FXML
     private void handleUpdateButton() {
