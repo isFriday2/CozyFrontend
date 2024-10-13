@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="leaderboardContainer" style="-fx-padding: 30; -fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.leaderboard.LeaderboardController">
+    <Label alignment="BOTTOM_LEFT" styleClass="" text="resident">
+        <font>
+            <Font name="Arial Rounded MT Bold" size="38.0" />
+        </font></Label>
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="470.0" prefWidth="470.0" style="-fx-background-color: #FFF; -fx-padding: 15;">
+    </ScrollPane>
+</VBox>
