@@ -1,6 +1,7 @@
 package com.maddev.coozy.controller.chore;
 
 import com.maddev.coozy.HelloApplication;
+import com.maddev.coozy.controller.leaderboard.LeaderboardController;
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.ChoreDAO;
