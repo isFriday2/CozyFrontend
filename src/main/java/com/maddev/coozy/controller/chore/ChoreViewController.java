@@ -1,6 +1,7 @@
 package com.maddev.coozy.controller.chore;
 
 import com.maddev.coozy.HelloApplication;
+import com.maddev.coozy.controller.leaderboard.LeaderboardController;
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.ChoreDAO;
@@ -45,18 +46,35 @@ public class ChoreViewController {
     private Button addChore;
     @FXML
     private Label date;
+    @FXML
+    private VBox leaderboardDisplay;
 
 
 
     // always call this function to load page but after setting a user for the controller
     public void init() {
+        System.out.println("Creating leaderboard");
+        leaderboardDisplay.getChildren().clear();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/com/maddev/coozy/leaderboard.fxml"));
+        try {
+            VBox leaderBoard = fxmlLoader.load();
+            LeaderboardController controller = fxmlLoader.getController();
+//            todo set tests
+//            if(testing) controller.setTesting();
+            controller.setUser(user);
+            controller.init();
+            leaderboardDisplay.getChildren().add(leaderBoard);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println("Creating chores list");
         choresLayout.getChildren().clear();
-        choresLayout.getChildren().removeAll();
         date.setText(LocalDate.now().toString());
         List<Chore> chores = new ArrayList<>(getChores(pending));
         for (Chore chore : chores) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/com/maddev/coozy/chore-anchor.fxml"));
             try {
                 AnchorPane anchorPane = fxmlLoader.load();

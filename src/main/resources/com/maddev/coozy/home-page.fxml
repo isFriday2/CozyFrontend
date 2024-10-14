@@ -52,8 +52,14 @@
             </AnchorPane>
          </children>
       </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="470.0">
-         <fx:include fx:id="leaderboard" source="leaderboard.fxml" />
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="470.0">
+         <children>
+            <VBox fx:id="leaderboardDisplay" prefHeight="380.0" prefWidth="410.0" />
+            <VBox prefHeight="333.0" prefWidth="410.0">
+               <fx:include fx:id="residentList" source="resident.fxml" />
+            </VBox>
+
+         </children>
       </VBox>
    </children>
 </HBox>

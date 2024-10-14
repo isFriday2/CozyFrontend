@@ -6,6 +6,7 @@ import com.maddev.coozy.model.UserDAO;
 import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.model.LeaderboardEntry;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -20,28 +21,42 @@ public class LeaderboardController {
 
     @FXML
     private VBox leaderboardContainer;
-
+    private VBox leaderboardContent;
+    private User currentUser;
     private UserDAO userDAO;
     private ChoreDAO choreDAO;
     private List<LeaderboardEntry> leaderboard;
+
 
     public LeaderboardController() {
         this.userDAO = new UserDAO();
         this.choreDAO = new ChoreDAO();
         this.leaderboard = new ArrayList<>();
+        this.leaderboardContent = new VBox(10);
+//        this.CurrentUser = user;
+
+    }
+
+    public void setUser(User user){
+        currentUser = user;
     }
 
     @FXML
-    public void initialize() {
+    public void init(){
+        System.out.println("Leaderboard container initialised with:" + leaderboardContent.getChildren().size());
         generateLeaderboard();
         displayLeaderboard();
+        scrollPane.setContent(leaderboardContent);
     }
 
-    private void generateLeaderboard() {
+    private void  generateLeaderboard(){
         List<User> users = userDAO.getAll();
-
+        System.out.println(currentUser.getUsername());
         for (User user : users) {
             List<Chore> completedChores = choreDAO.getAllCompletedByUser(user.getId());
+//            System.out.println("Current User" + CurrentUser.getHome()+ "user" + user.getHome());
+            if(!Objects.equals(currentUser.getHome(), user.getHome())) continue;
+            System.out.println("Current User" + currentUser.getHome()+ "user" + user.getHome());
             int totalReward = calculateTotalReward(completedChores);
             leaderboard.add(new LeaderboardEntry(user, totalReward));
         }
@@ -50,17 +65,20 @@ public class LeaderboardController {
         leaderboard.sort((a, b) -> Integer.compare(b.getTotalReward(), a.getTotalReward()));
     }
 
+
     private void displayLeaderboard() {
-        VBox entriesContainer = new VBox(10); // 10 is the spacing between entries
-        entriesContainer.setStyle("-fx-padding: 15;");
+        leaderboardContent.setStyle("-fx-padding: 15;");
+        leaderboardContent.getChildren().clear(); // 10 is the spacing between entries
 
         for (int i = 0; i < leaderboard.size(); i++) {
             LeaderboardEntry entry = leaderboard.get(i);
             BorderPane entryPane = createLeaderboardEntryPane(entry, i + 1);
-            entriesContainer.getChildren().add(entryPane);
+            leaderboardContent.getChildren().add(entryPane);
         }
 
-        scrollPane.setContent(entriesContainer);
+        System.out.println("Leaderboard updated with " + leaderboardContent.getChildren().size() + " entries");
+
+
     }
 
     private BorderPane createLeaderboardEntryPane(LeaderboardEntry entry, int rank) {

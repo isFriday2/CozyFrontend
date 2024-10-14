@@ -1,4 +1,4 @@
-package com.maddev.coozy.controller.leaderboard;
+package com.maddev.coozy.controller;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXML;
@@ -16,7 +16,7 @@ public class ResidentController {
     private ScrollPane scrollPane;
 
     @FXML
-    private VBox leaderboardContainer;
+    private VBox ResidentContainer;
 
     private UserDAO userDAO = new UserDAO();
 

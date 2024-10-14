@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #cce3de;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.RegisterController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #cce3de;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.RegisterController">
     <children>
         <Label layoutX="181.0" layoutY="14.0" text="Register an Account" textFill="#62bfed">
             <font>
@@ -19,23 +24,48 @@
             <children>
                 <HBox prefHeight="28.0" prefWidth="336.0" spacing="35.0">
                     <children>
-                        <TextField fx:id="usernameField" promptText="Username" />
-                        <TextField fx:id="nicknameField" promptText="Nickname" />
+                  <VBox prefHeight="43.0" prefWidth="159.0">
+                     <children>
+                        <Label text="Username" />
+                              <TextField fx:id="usernameField" promptText="Username" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="43.0" prefWidth="165.0">
+                     <children>
+                        <Label text="Nickname" />
+                              <TextField fx:id="nicknameField" promptText="Nickname" />
+                     </children>
+                  </VBox>
                     </children>
                 </HBox>
-                <TextField fx:id="emailField" promptText="Email" />
-                <TextField fx:id="homeField" prefHeight="41.0" prefWidth="336.0" promptText="Address" />
-                <PasswordField fx:id="passwordField" prefHeight="23.0" prefWidth="336.0" promptText="Password" />
+            <VBox>
+               <children>
+                  <Label text="Email" />
+                      <TextField fx:id="emailField" promptText="Email" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="House Code" />
+                      <TextField fx:id="homeField" prefHeight="41.0" prefWidth="336.0" promptText="Enter existing house code or create one" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="Password" />
+                      <PasswordField fx:id="passwordField" prefHeight="23.0" prefWidth="336.0" promptText="Password" />
+               </children>
+            </VBox>
                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <children>
-                        <Button fx:id="registerButton" onAction="#handleRegisterButtonAction" mnemonicParsing="false" text="Register" textFill="#62bfed">
+                        <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegisterButtonAction" text="Register" textFill="#62bfed">
                             <HBox.margin>
                                 <Insets left="100.0" />
                             </HBox.margin>
                             <font>
                                 <Font name="Arial Rounded MT Bold" size="12.0" />
                             </font></Button>
-                        <Button fx:id="cancelButton" onAction="#handleCancelButtonAction" mnemonicParsing="false" text="Cancel" textAlignment="CENTER" textFill="RED" />
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Cancel" textAlignment="CENTER" textFill="RED" />
                     </children>
                 </HBox>
             </children>

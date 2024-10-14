@@ -55,7 +55,7 @@ public class RegisterController {
 
         // Mandatory Inputs
         if (username.isEmpty() || nickname.isEmpty() || email.isEmpty() || home.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Uh oh!", "Please fill in all fields.");
+            showAlert(Alert.AlertType.ERROR, "Missing Fields", "Please fill in all fields.");
             return;
         }
 

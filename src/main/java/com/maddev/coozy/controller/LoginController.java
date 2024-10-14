@@ -1,5 +1,6 @@
 package com.maddev.coozy.controller;
 import com.maddev.coozy.controller.chore.ChoreViewController;
+import com.maddev.coozy.controller.leaderboard.LeaderboardController;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 
@@ -48,11 +49,21 @@ public class LoginController {
             if (hashedInputPassword.equals(user.getPassword())) {
                 // Successful login
                 try {
+
+//
+//                    FXMLLoader leaderboardFXML = new FXMLLoader(getClass().getResource("/com/maddev/coozy/leaderboard.fxml"));
+//                    LeaderboardController leaderboard = new LeaderboardController(user);
+//                    leaderboardFXML.setController(leaderboard);
+//                    Object leaderboardView = leaderboardFXML.load();
+
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/home-page.fxml"));
                     Parent homePage = loader.load();
                     ChoreViewController controller=loader.getController();
                     controller.setUser(user);
                     controller.init();
+
+
+
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.setScene(new Scene(homePage));
                     stage.setTitle("Home");
