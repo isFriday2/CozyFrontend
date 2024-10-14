@@ -50,7 +50,7 @@ public class LoginController {
                 // Successful login
                 try {
 
-//
+
 //                    FXMLLoader leaderboardFXML = new FXMLLoader(getClass().getResource("/com/maddev/coozy/leaderboard.fxml"));
 //                    LeaderboardController leaderboard = new LeaderboardController(user);
 //                    leaderboardFXML.setController(leaderboard);
