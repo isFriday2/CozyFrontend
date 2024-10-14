@@ -22,7 +22,7 @@ public class LeaderboardController {
     @FXML
     private VBox leaderboardContainer;
     private VBox leaderboardContent;
-    private User CurrentUser;
+    private User currentUser;
     private UserDAO userDAO;
     private ChoreDAO choreDAO;
     private List<LeaderboardEntry> leaderboard;
@@ -37,9 +37,12 @@ public class LeaderboardController {
 
     }
 
-    @FXML
-    public void initialize(){
+    public void setUser(User user){
+        currentUser = user;
+    }
 
+    @FXML
+    public void init(){
         System.out.println("Leaderboard container initialised with:" + leaderboardContent.getChildren().size());
         generateLeaderboard();
         displayLeaderboard();
@@ -48,12 +51,12 @@ public class LeaderboardController {
 
     private void  generateLeaderboard(){
         List<User> users = userDAO.getAll();
-
+        System.out.println(currentUser.getUsername());
         for (User user : users) {
             List<Chore> completedChores = choreDAO.getAllCompletedByUser(user.getId());
 //            System.out.println("Current User" + CurrentUser.getHome()+ "user" + user.getHome());
-//            if(!Objects.equals(CurrentUser.getHome(), user.getHome())) continue;
-//            System.out.println("Current User" + CurrentUser.getHome()+ "user" + user.getHome());
+            if(!Objects.equals(currentUser.getHome(), user.getHome())) continue;
+            System.out.println("Current User" + currentUser.getHome()+ "user" + user.getHome());
             int totalReward = calculateTotalReward(completedChores);
             leaderboard.add(new LeaderboardEntry(user, totalReward));
         }

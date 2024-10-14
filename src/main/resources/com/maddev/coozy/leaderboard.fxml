@@ -11,6 +11,6 @@
         <font>
             <Font name="Arial Rounded MT Bold" size="38.0" />
         </font></Label>
-    <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="410.0" prefWidth="380.0" style="-fx-background-color: #FFF; -fx-padding: 15;">
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="380.0" prefWidth="410.0" style="-fx-background-color: #FFF; ">
     </ScrollPane>
 </VBox>

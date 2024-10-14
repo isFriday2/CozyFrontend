@@ -2,15 +2,14 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="ResidentContainer" style="-fx-padding: 30; -fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.ResidentController">
+<VBox fx:id="ResidentContainer" style="-fx-padding: 30; -fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.ResidentController">
     <Label alignment="BOTTOM_LEFT" styleClass="" text="House Member">
         <font>
             <Font name="Arial Rounded MT Bold" size="38.0" />
         </font></Label>
-    <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="410.0" prefWidth="333.0" style="-fx-background-color: #FFF; -fx-padding: 15;">
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="333.0" prefWidth="410.0" style="-fx-background-color: #FFF;">
     </ScrollPane>
 </VBox>
