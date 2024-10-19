@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import java.util.*;
 
 public class LeaderboardController {
+    private boolean testing = false;
 
     @FXML
     private ScrollPane scrollPane;
@@ -34,7 +35,13 @@ public class LeaderboardController {
         this.leaderboard = new ArrayList<>();
         this.leaderboardContent = new VBox(10);
 //        this.CurrentUser = user;
+    }
 
+    // run before init to use the test db
+    public void setTesting(){
+        testing=true;
+        choreDAO=new ChoreDAO(true);
+        userDAO= new UserDAO(true);
     }
 
     public void setUser(User user){
@@ -46,6 +53,7 @@ public class LeaderboardController {
         System.out.println("Leaderboard container initialised with:" + leaderboardContent.getChildren().size());
         generateLeaderboard();
         displayLeaderboard();
+        leaderboardContent.setId("leaderboardContent");
         scrollPane.setContent(leaderboardContent);
     }
 
