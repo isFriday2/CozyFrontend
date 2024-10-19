@@ -1,6 +1,7 @@
 package com.maddev.coozy.controller;
 import com.maddev.coozy.controller.chore.ChoreViewController;
 import com.maddev.coozy.controller.leaderboard.LeaderboardController;
+import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 
@@ -16,6 +17,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController {
+    private boolean testing=false;
+
     @FXML
     private TextField usernameField;
 
@@ -30,6 +33,11 @@ public class LoginController {
 
     // Create an instance of UserDAO to interact with the database
     private UserDAO userDAO = new UserDAO();
+
+    public void setTesting(){
+        testing=true;
+        userDAO=new UserDAO(true);
+    }
 
     // Handle button click logic
     @FXML
@@ -60,6 +68,7 @@ public class LoginController {
                     Parent homePage = loader.load();
                     ChoreViewController controller=loader.getController();
                     controller.setUser(user);
+                    if(testing) controller.setTesting();
                     controller.init();
 
 

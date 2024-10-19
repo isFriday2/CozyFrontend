@@ -22,7 +22,7 @@
                   <Font name="Arial Rounded MT Bold" size="61.0" />
                </font>
             </Label>
-            <Hyperlink alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" onAction="#onLogOut" prefHeight="152.0" prefWidth="250.0" text="Log out" textFill="#947f7f">
+            <Hyperlink fx:id="logoutLink" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" onAction="#onLogOut" prefHeight="152.0" prefWidth="250.0" text="Log out" textFill="#947f7f">
                <VBox.margin>
                   <Insets top="560.0" />
                </VBox.margin>
@@ -35,7 +35,7 @@
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="450.0">
                <children>
-                  <Label contentDisplay="CENTER" layoutX="20.0" layoutY="21.0" prefHeight="67.0" prefWidth="280.0" text="CHORES">
+                  <Label fx:id="choresTitle" contentDisplay="CENTER" layoutX="20.0" layoutY="21.0" prefHeight="67.0" prefWidth="280.0" text="CHORES">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="50.0" />
                      </font>
