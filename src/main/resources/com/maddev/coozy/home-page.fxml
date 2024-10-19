@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -13,7 +15,22 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1133.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.maddev.coozy.controller.chore.ChoreViewController">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="250.0" style="-fx-background-color: #cce3de;" />
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="250.0" style="-fx-background-color: #cce3de;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="94.0" prefWidth="250.0" text="Cozy">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="61.0" />
+               </font>
+            </Label>
+            <Hyperlink alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" onAction="#onLogOut" prefHeight="152.0" prefWidth="250.0" text="Log out" textFill="#947f7f">
+               <VBox.margin>
+                  <Insets top="560.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="26.0" />
+               </font>
+            </Hyperlink>
+         </children></VBox>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="450.0">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="450.0">
@@ -23,7 +40,7 @@
                         <Font name="Arial Rounded MT Bold" size="50.0" />
                      </font>
                   </Label>
-                  <FontAwesomeIconView accessibleRole="BUTTON" glyphName="CALENDAR" layoutX="310.0" layoutY="80.0" size="40"/>
+                  <FontAwesomeIconView accessibleRole="BUTTON" glyphName="CALENDAR" layoutX="310.0" layoutY="80.0" size="40" />
                   <FontAwesomeIconView accessibleRole="BUTTON" glyphName="BOOK" layoutX="380.0" layoutY="80.0" onMouseClicked="#onViewPending" size="40" />
                   <Label fx:id="date" alignment="TOP_LEFT" layoutX="20.0" layoutY="90.0" prefHeight="38.0" prefWidth="280.0" text="DATE" textFill="#bcbcbc">
                      <font>

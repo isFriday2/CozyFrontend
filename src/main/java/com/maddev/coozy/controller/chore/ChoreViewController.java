@@ -113,4 +113,13 @@ public class ChoreViewController {
         Scene scene = new Scene(root, 600, 400);
         stage.setScene(scene);
     }
+
+    @FXML
+    public void onLogOut() throws IOException{
+        Stage stage = (Stage) addChore.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, 600, 400);
+        stage.setScene(scene);
+    }
 }
