@@ -185,11 +185,11 @@
                         --add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                         --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                     </argLine>
-                    <systemPropertyVariables>
-                        <testfx.headless>true</testfx.headless>
-                        <prism.order>sw</prism.order>
-                        <monocle.platform>Headless</monocle.platform>
-                    </systemPropertyVariables>
+<!--                    <systemPropertyVariables>-->
+<!--                        <testfx.headless>true</testfx.headless>-->
+<!--                        <prism.order>sw</prism.order>-->
+<!--                        <monocle.platform>Headless</monocle.platform>-->
+<!--                    </systemPropertyVariables>-->
                 </configuration>
             </plugin>
             <plugin>

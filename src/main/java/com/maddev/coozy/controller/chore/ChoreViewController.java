@@ -60,8 +60,7 @@ public class ChoreViewController {
         try {
             VBox leaderBoard = fxmlLoader.load();
             LeaderboardController controller = fxmlLoader.getController();
-//            todo set tests
-//            if(testing) controller.setTesting();
+            if(testing) controller.setTesting();
             controller.setUser(user);
             controller.init();
             leaderboardDisplay.getChildren().add(leaderBoard);

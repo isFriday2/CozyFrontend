@@ -91,6 +91,7 @@ public class ChoreAnchorController {
     private void onLeftClick(){
         chore.setCompleted(!chore.isCompleted());
         choreDAO.update(chore);
-        setData();
+        parentController.init();
+//        setData();
     }
 }
