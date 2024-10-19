@@ -1,6 +1,7 @@
 package com.maddev.coozy.controller.chore;
 
 import com.maddev.coozy.HelloApplication;
+import com.maddev.coozy.controller.ResidentController;
 import com.maddev.coozy.controller.leaderboard.LeaderboardController;
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.User;
@@ -48,6 +49,8 @@ public class ChoreViewController {
     private Label date;
     @FXML
     private VBox leaderboardDisplay;
+    @FXML
+    private VBox residentDisplay;
 
 
 
@@ -64,6 +67,21 @@ public class ChoreViewController {
             controller.setUser(user);
             controller.init();
             leaderboardDisplay.getChildren().add(leaderBoard);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Creating resident list");
+        residentDisplay.getChildren().clear();
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/com/maddev/coozy/resident.fxml"));
+        try {
+            VBox list = fxmlLoader.load();
+            ResidentController controller = fxmlLoader.getController();
+            if(testing) controller.setTesting();
+            controller.setUser(user);
+            controller.init();
+            residentDisplay.getChildren().add(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
