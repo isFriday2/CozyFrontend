@@ -56,7 +56,6 @@ public class LeaderboardController {
             List<Chore> completedChores = choreDAO.getAllCompletedByUser(user.getId());
 //            System.out.println("Current User" + CurrentUser.getHome()+ "user" + user.getHome());
             if(!Objects.equals(currentUser.getHome(), user.getHome())) continue;
-            System.out.println("Current User" + currentUser.getHome()+ "user" + user.getHome());
             int totalReward = calculateTotalReward(completedChores);
             leaderboard.add(new LeaderboardEntry(user, totalReward));
         }

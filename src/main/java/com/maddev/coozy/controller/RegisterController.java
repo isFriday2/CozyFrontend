@@ -1,6 +1,7 @@
 package com.maddev.coozy.controller;
 
 
+import com.maddev.coozy.HelloApplication;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXML;
@@ -18,9 +19,14 @@ import javafx.stage.Modality;
 import java.io.IOException;
 
 public class RegisterController {
+    private boolean testing=false;
 
     // Create an instance of UserDAO to interact with the database
     private UserDAO userDAO = new UserDAO();
+    public void setTesting(){
+        testing=true;
+        userDAO=new UserDAO(true);
+    }
 
     // Declare IDs for fields
     @FXML
@@ -55,7 +61,7 @@ public class RegisterController {
 
         // Mandatory Inputs
         if (username.isEmpty() || nickname.isEmpty() || email.isEmpty() || home.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Missing Fields", "Please fill in all fields.");
+            if(!testing) showAlert(Alert.AlertType.ERROR, "Missing Fields", "Please fill in all fields.");
             return;
         }
 
@@ -66,15 +72,14 @@ public class RegisterController {
 
         // Add new user to DB using new object - complete check in same step
         if (isUserAdded) { // If new user insert boolean output true
-            showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "User registered successfully.");
-            //Redirect to Login
+            if(!testing) showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "User registered successfully.");
+            //Redirect to Log in
             // Get the current stage
             Stage currentStage = (Stage) registerButton.getScene().getWindow();
-            currentStage.close();
-            redirectToLogin();
+            redirectToLogin(currentStage);
 
         } else { // If new user insert boolean output false
-            showAlert(Alert.AlertType.ERROR, "Registration Failed!", "There was an error registering the user.");
+            if(!testing) showAlert(Alert.AlertType.ERROR, "Registration Failed!", "There was an error registering the user.");
         }
 
     }
@@ -91,20 +96,20 @@ public class RegisterController {
     private void handleCancelButtonAction() {
         // Close the registration window
         Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-        redirectToLogin();
+        redirectToLogin(stage);
     }
 
-    private void redirectToLogin() {
+    private void redirectToLogin(Stage stage) {
         try {
             // Load login.fxml
-            Parent root = FXMLLoader.load(getClass().getResource("/com/maddev/coozy/login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/maddev/coozy/login.fxml"));
+            Parent root = fxmlLoader.load();
+            LoginController controller = fxmlLoader.getController();
+            if(testing) controller.setTesting();
 
             // Create a new stage for the login screen
-            Stage loginStage = new Stage();
-            loginStage.setTitle("Login Page");
-            loginStage.setScene(new Scene(root, 600, 400)); // Set the size if needed
-            loginStage.show();
+            stage.setTitle("Login Page");
+            stage.setScene(new Scene(root, 600, 400)); // Set the size if needed
 
         } catch (IOException e) {
             e.printStackTrace();
