@@ -1,4 +1,5 @@
 package com.maddev.coozy.controller;
+import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXML;
@@ -11,6 +12,22 @@ import javafx.scene.text.Font;
 import java.util.List;
 
 public class ResidentController {
+    private boolean testing=false;
+    private UserDAO userDAO;
+
+    public ResidentController() {
+        userDAO =  new UserDAO();
+    }
+
+    public void setTesting(){
+        testing=true;
+        userDAO=new UserDAO(true);
+    }
+
+    private User user;
+    public void setUser(User user){
+        this.user = user;
+    }
 
     @FXML
     private ScrollPane scrollPane;
@@ -18,12 +35,8 @@ public class ResidentController {
     @FXML
     private VBox ResidentContainer;
 
-    private UserDAO userDAO = new UserDAO();
-
-    public ResidentController() {}
-
     @FXML
-    public void initialize() {
+    public void init() {
         this.displayResidents();
     }
 
@@ -32,7 +45,7 @@ public class ResidentController {
         entriesContainer.setStyle("-fx-padding: 15;");
 
         // Retrieve all users and display only their username and id
-        List<User> users = this.userDAO.getAll();
+        List<User> users = this.userDAO.getAllByHome(user.getHome());
 
         for (User user : users) {
             BorderPane entryPane = createResidentEntryPane(user);

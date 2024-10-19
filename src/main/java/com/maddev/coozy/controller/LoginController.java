@@ -92,7 +92,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/register.fxml"));
             Parent registerForm = loader.load();
             RegisterController controller=loader.getController();
-            controller.setTesting();
+            if(testing) controller.setTesting();
             Stage stage = (Stage) registerLink.getScene().getWindow();
             stage.setScene(new Scene(registerForm));
             stage.requestFocus();
