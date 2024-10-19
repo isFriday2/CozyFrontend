@@ -57,25 +57,15 @@ public class LoginController {
             if (hashedInputPassword.equals(user.getPassword())) {
                 // Successful login
                 try {
-
-//
-//                    FXMLLoader leaderboardFXML = new FXMLLoader(getClass().getResource("/com/maddev/coozy/leaderboard.fxml"));
-//                    LeaderboardController leaderboard = new LeaderboardController(user);
-//                    leaderboardFXML.setController(leaderboard);
-//                    Object leaderboardView = leaderboardFXML.load();
-
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/home-page.fxml"));
                     Parent homePage = loader.load();
                     ChoreViewController controller=loader.getController();
                     controller.setUser(user);
                     if(testing) controller.setTesting();
                     controller.init();
-
-
-
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    stage.setScene(new Scene(homePage));
-                    stage.setTitle("Home");
+                    Scene scene = new Scene(homePage,1133, 744);
+                    stage.setScene(scene);
                 } catch (IOException e) {
                     e.printStackTrace(); // This will print the stack trace to help diagnose the problem
                     showAlert(AlertType.ERROR, "Error", "Failed to load home page.");
@@ -101,8 +91,11 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/register.fxml"));
             Parent registerForm = loader.load();
+            RegisterController controller=loader.getController();
+            controller.setTesting();
             Stage stage = (Stage) registerLink.getScene().getWindow();
             stage.setScene(new Scene(registerForm));
+            stage.requestFocus();
             stage.setTitle("Register");
         } catch (IOException e) {
             e.printStackTrace(); // This will print the stack trace to help diagnose the problem
@@ -112,6 +105,7 @@ public class LoginController {
 
     // Method for showing alerts using Alert
     private void showAlert(AlertType type, String title, String message) {
+        if(testing) return;
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);

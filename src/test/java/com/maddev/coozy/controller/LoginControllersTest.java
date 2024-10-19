@@ -1,29 +1,21 @@
-package com.maddev.coozy.controller.chore;
+package com.maddev.coozy.controller;
 
 import com.maddev.coozy.HelloApplication;
-import com.maddev.coozy.controller.LoginController;
-import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.control.LabeledMatchers;
 
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ApplicationExtension.class)
 class LoginControllersTest {
@@ -69,7 +61,6 @@ class LoginControllersTest {
         robot.clickOn("#passwordField");
         robot.write("TestPass");
         robot.clickOn("#loginButton");
-
         Hyperlink logout = robot.lookup("#logoutLink").queryAs(Hyperlink.class);
         assertNotNull(logout);
         robot.clickOn(logout);
@@ -93,10 +84,10 @@ class LoginControllersTest {
         robot.clickOn("#passwordField");
         robot.write("testPass2");
         robot.clickOn("#registerButton");
-        robot.clickOn("OK");
 
         // logs in as the new user
-        robot.clickOn("#usernameField");
+        TextField username = robot.lookup("#usernameField").queryAs(TextField.class);
+        robot.clickOn(username);
         robot.write("testName2");
         robot.clickOn("#passwordField");
         robot.write("testPass2");
@@ -104,6 +95,7 @@ class LoginControllersTest {
 
         Hyperlink logout = robot.lookup("#logoutLink").queryAs(Hyperlink.class);
         assertNotNull(logout);
+
     }
 
 }
