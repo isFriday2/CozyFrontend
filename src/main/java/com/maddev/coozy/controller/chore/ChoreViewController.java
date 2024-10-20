@@ -21,22 +21,39 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Controller class for the main chore view.
+ * Manages the display of the leaderboard, resident list, and chore list.
+ */
 public class ChoreViewController {
     private ChoreDAO choreDAO;
     private boolean pending=false;
     private boolean testing=false;
+    private User user;
 
+    /**
+     * Constructs a new ChoreViewController.
+     * Initializes the ChoreDAO for database operations.
+     */
     public ChoreViewController() {
         choreDAO = new ChoreDAO();
     }
 
+    /**
+     * Sets the controller to testing mode.
+     * In testing mode, it uses a test database for ChoreDAO.
+     */
     // run before init to use the test db
     public void setTesting(){
         testing=true;
         choreDAO=new ChoreDAO(true);
     }
 
-    private User user;
+    /**
+     * Sets the current user for the controller.
+     * @param user The current User object.
+     */
+
     public void setUser(User user){
         this.user = user;
     }
@@ -53,7 +70,10 @@ public class ChoreViewController {
     private VBox residentDisplay;
 
 
-
+    /**
+     * Initializes the view by loading the leaderboard, resident list, and chore list.
+     * This method should be called after setting the user for the controller.
+     */
     // always call this function to load page but after setting a user for the controller
     public void init() {
         System.out.println("Creating leaderboard");
@@ -107,17 +127,28 @@ public class ChoreViewController {
 
     }
 
+    /**
+     * Retrieves chores for the current user.
+     * @param pending If true, retrieves only pending chores; otherwise, retrieves all chores.
+     * @return A list of Chore objects.
+     */
     private List<Chore> getChores(boolean pending) {
         if(!pending) return choreDAO.getAllByUser(user.getId());
         else return choreDAO.getAllPendingByUser(user.getId());
     }
-
+    /**
+     * Toggles between viewing all chores and pending chores only.
+     */
     @FXML
     public void onViewPending(){
         pending=!pending;
         init();
     }
-
+    /**
+     * Handles the add chore button click.
+     * Opens the add chore view.
+     * @throws IOException If there's an error loading the add chore view.
+     */
     @FXML
     public void onAddChore() throws IOException {
         Stage stage = (Stage) addChore.getScene().getWindow();
@@ -131,6 +162,11 @@ public class ChoreViewController {
         stage.setScene(scene);
     }
 
+    /**
+     * Handles the log out button click.
+     * Returns to the login view.
+     * @throws IOException If there's an error loading the login view.
+     */
     @FXML
     public void onLogOut() throws IOException{
         Stage stage = (Stage) addChore.getScene().getWindow();

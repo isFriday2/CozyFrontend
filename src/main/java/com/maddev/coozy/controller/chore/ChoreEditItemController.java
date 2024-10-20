@@ -2,7 +2,6 @@ package com.maddev.coozy.controller.chore;
 
 import com.maddev.coozy.model.Chore;
 import com.maddev.coozy.model.ChoreDAO;
-import com.maddev.coozy.controller.chore.ChoreViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
@@ -12,23 +11,16 @@ import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/**
+ * Controller class for editing and deleting chore items.
+ * Handles the display of chore details and provides functionality to delete chores.
+ */
 public class ChoreEditItemController {
 
-
-    // Create DB DAO connections
     private ChoreDAO choreDAO = new ChoreDAO();
-
     private Chore currentChore;
-
     private ChoreViewController parentController;
-
-    private boolean testing=false;
-
-    // run before init to use the test db
-    public void setTesting(){
-        testing=true;
-        choreDAO=new ChoreDAO(true);
-    }
+    private boolean testing = false;
 
     @FXML
     private Label choreDueDate;
@@ -36,41 +28,63 @@ public class ChoreEditItemController {
     @FXML
     private Label choreTitle;
 
-    public void setData(Chore chore, ChoreViewController parentController){
-        this.parentController=parentController;
-        currentChore=chore;
+    /**
+     * Sets the controller to testing mode.
+     * In testing mode, it uses a test database for ChoreDAO.
+     */
+    public void setTesting() {
+        testing = true;
+        choreDAO = new ChoreDAO(true);
+    }
+
+    /**
+     * Sets the data for the chore edit item.
+     * @param chore The Chore object to be displayed and edited.
+     * @param parentController The parent ChoreViewController.
+     */
+    public void setData(Chore chore, ChoreViewController parentController) {
+        this.parentController = parentController;
+        currentChore = chore;
         choreTitle.setText(chore.getName());
-//        setChore(chore);
-        if(chore.isCompleted()){
+        updateDueDateLabel(chore);
+    }
+
+    /**
+     * Updates the due date label based on the chore's completion status and due date.
+     * @param chore The Chore object whose due date is to be displayed.
+     */
+    private void updateDueDateLabel(Chore chore) {
+        if (chore.isCompleted()) {
             choreDueDate.setText("Chore Completed");
-        }else{
-            LocalDate dateNow=LocalDate.now();
-            long daysDue=DAYS.between(dateNow, chore.getDueDate());
-            choreDueDate.setText("Due in "+daysDue+" days");
+        } else {
+            LocalDate dateNow = LocalDate.now();
+            long daysDue = DAYS.between(dateNow, chore.getDueDate());
+            choreDueDate.setText("Due in " + daysDue + " days");
         }
     }
 
+    /**
+     * Handles the delete icon click event.
+     * Confirms deletion with the user and deletes the chore if confirmed.
+     */
     @FXML
     private void handleDeleteIcon() {
-        boolean confirmed = confirmDelete();
-        if (confirmed) {
+        if (confirmDelete()) {
             try {
-                // Call delete method from ChoreDAO
                 choreDAO.delete(currentChore.getId());
                 System.out.println("Chore deleted successfully");
-                // Update table
                 parentController.init();
-
             } catch (Exception e) {
                 System.err.println("Failed to delete chore: " + e.getMessage());
-                // Show an alert if the delete fails
                 showAlert("Error", "Failed to delete the chore. Please try again.");
             }
         }
     }
 
-    // Boolean confirmation to confirm user's deletion request
-    // Implement below Alert function
+    /**
+     * Displays a confirmation dialog for chore deletion.
+     * @return true if the user confirms deletion, false otherwise.
+     */
     private boolean confirmDelete() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Deletion");
@@ -79,7 +93,11 @@ public class ChoreEditItemController {
         return alert.showAndWait().orElse(null) == ButtonType.OK;
     }
 
-    // Function to create Alert
+    /**
+     * Displays an alert dialog with the given title and message.
+     * @param title The title of the alert dialog.
+     * @param message The message to be displayed in the alert dialog.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
