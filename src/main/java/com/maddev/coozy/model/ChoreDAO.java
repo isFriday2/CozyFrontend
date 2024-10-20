@@ -5,28 +5,39 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data Access Object (DAO) for Chore entities.
+ * This class handles all database operations related to Chores,
+ * including CRUD operations and various retrieval methods.
+ */
 public class ChoreDAO {
     private Connection connection;
 
-    // Create DB connection instance
+    /**
+     * Constructs a ChoreDAO and establishes a database connection.
+     * It also ensures that the chores table exists in the database.
+     */
     public ChoreDAO() {
         connection = DatabaseConnection.getInstance();
         createTable();
     }
 
-    // Creates DB connection for unit tests
+    /**
+     * Constructs a ChoreDAO with an option for testing purposes.
+     * @param test If true, uses a test database connection; otherwise, uses the standard connection.
+     */
     public ChoreDAO(boolean test){
         if(test){
             connection = TestDatabaseConnection.getInstance();
-            createTable();
-        }else{
+        } else {
             connection = DatabaseConnection.getInstance();
-            createTable();
         }
+        createTable();
     }
 
-    // Create table in db
-    // Will not create table if already exists
+    /**
+     * Creates the chores table in the database if it doesn't already exist.
+     */
     public void createTable() {
         try {
             Statement createTable = connection.createStatement();
@@ -41,7 +52,6 @@ public class ChoreDAO {
                             + "icon VARCHAR NOT NULL,"
                             + "due_date VARCHAR,"
                             + "completed INT"
-//                            + "FOREIGN KEY(userId) REFERENCES Users(id)"
                             + ")"
             );
         } catch (SQLException ex) {
@@ -49,19 +59,23 @@ public class ChoreDAO {
         }
     }
 
-    // Erases all chores in the db, use it only with the test db
+    /**
+     * Resets the chores table by deleting all entries.
+     * This method should only be used with the test database.
+     */
     public void resetTable(){
         try {
             Statement createTable = connection.createStatement();
-            createTable.execute(
-                    "DELETE FROM chores"
-            );
+            createTable.execute("DELETE FROM chores");
         } catch (SQLException ex) {
             System.err.println(ex);
         }
     }
 
-    // Insert new chore (with no missing info) into db
+    /**
+     * Inserts a new chore into the database.
+     * @param chore The Chore object to be inserted.
+     */
     public void insert(Chore chore) {
         try {
             PreparedStatement insertChore = connection.prepareStatement(
@@ -81,12 +95,14 @@ public class ChoreDAO {
         }
     }
 
-    // Update details of existing chore in db
+    /**
+     * Updates an existing chore in the database.
+     * @param chore The Chore object with updated information.
+     */
     public void update(Chore chore) {
         try {
             PreparedStatement updateChore = connection.prepareStatement(
-                    "UPDATE chores SET user_id = ?, name = ?, description = ?, reward = ?, home = ?, icon = ?," +
-                            " due_date = ?, completed = ? WHERE id = ?"
+                    "UPDATE chores SET user_id = ?, name = ?, description = ?, reward = ?, home = ?, icon = ?, due_date = ?, completed = ? WHERE id = ?"
             );
             updateChore.setInt(1, chore.getUserId());
             updateChore.setString(2, chore.getName());
@@ -103,21 +119,25 @@ public class ChoreDAO {
         }
     }
 
-    // Delete existing chore in db
+    /**
+     * Deletes a chore from the database.
+     * @param id The ID of the chore to be deleted.
+     */
     public void delete(int id) {
         try {
             PreparedStatement deleteChore = connection.prepareStatement("DELETE FROM chores WHERE id = ?");
             deleteChore.setInt(1, id);
             deleteChore.execute();
-
         } catch (SQLException ex) {
             System.err.println(ex);
         }
     }
 
-    // db getters
-
-    // get chore by chore id
+    /**
+     * Retrieves a chore from the database by its ID.
+     * @param id The ID of the chore to retrieve.
+     * @return The Chore object if found, null otherwise.
+     */
     public Chore getById(int id) {
         try {
             PreparedStatement getChore = connection.prepareStatement("SELECT * FROM chores WHERE id = ?");
@@ -142,7 +162,11 @@ public class ChoreDAO {
         return null;
     }
 
-    // get all the chores belonging to one user by user id
+    /**
+     * Retrieves all chores belonging to a specific user.
+     * @param id The ID of the user.
+     * @return A List of Chore objects belonging to the specified user.
+     */
     public List<Chore> getAllByUser(int id) {
         List<Chore> chores= new ArrayList<>();
         try {
@@ -170,6 +194,11 @@ public class ChoreDAO {
         return chores;
     }
 
+    /**
+     * Retrieves all pending (uncompleted) chores for a specific user.
+     * @param id The ID of the user.
+     * @return A List of pending Chore objects for the specified user.
+     */
     public List<Chore> getAllPendingByUser(int id) {
         List<Chore> chores= new ArrayList<>();
         try {
@@ -197,6 +226,11 @@ public class ChoreDAO {
         return chores;
     }
 
+    /**
+     * Retrieves all completed chores for a specific user.
+     * @param id The ID of the user.
+     * @return A List of completed Chore objects for the specified user.
+     */
     public List<Chore> getAllCompletedByUser(int id) {
         List<Chore> chores= new ArrayList<>();
         try {
