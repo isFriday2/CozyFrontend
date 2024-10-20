@@ -1,6 +1,5 @@
 package com.maddev.coozy.controller;
 
-
 import com.maddev.coozy.HelloApplication;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
@@ -13,22 +12,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.Modality;
-
 
 import java.io.IOException;
 
+/**
+ * Controller class for the user registration view.
+ * Handles user registration and navigation to the login view.
+ */
 public class RegisterController {
-    private boolean testing=false;
+    private boolean testing = false;
 
-    // Create an instance of UserDAO to interact with the database
     private UserDAO userDAO = new UserDAO();
-    public void setTesting(){
-        testing=true;
-        userDAO=new UserDAO(true);
-    }
 
-    // Declare IDs for fields
     @FXML
     private TextField usernameField;
     @FXML
@@ -37,80 +32,89 @@ public class RegisterController {
     private TextField emailField;
     @FXML
     private TextField homeField;
-
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private Button registerButton;
     @FXML
     private Button cancelButton;
 
-    // Handle Button Clicks
-    // Register
+    /**
+     * Sets the controller to testing mode.
+     * In testing mode, it uses a test database and disables alerts.
+     */
+    public void setTesting() {
+        testing = true;
+        userDAO = new UserDAO(true);
+    }
+
+    /**
+     * Handles the register button click event.
+     * Validates input, creates a new user, and redirects to login on success.
+     */
     @FXML
     private void handleRegisterButtonAction() {
-        // Get User Inputs
         String username = usernameField.getText();
         String nickname = nicknameField.getText();
         String email = emailField.getText();
         String home = homeField.getText();
         String password = passwordField.getText();
-        // Hash Password
         String hashedPassword = User.hashPassword(password);
 
-        // Mandatory Inputs
         if (username.isEmpty() || nickname.isEmpty() || email.isEmpty() || home.isEmpty() || password.isEmpty()) {
-            if(!testing) showAlert(Alert.AlertType.ERROR, "Missing Fields", "Please fill in all fields.");
+            if (!testing) showAlert(Alert.AlertType.ERROR, "Missing Fields", "Please fill in all fields.");
             return;
         }
 
-        // Create new object
-        User newuser = new User(username, email, nickname, home, hashedPassword);
+        User newUser = new User(username, email, nickname, home, hashedPassword);
 
-        boolean isUserAdded = userDAO.insert(newuser);
+        boolean isUserAdded = userDAO.insert(newUser);
 
-        // Add new user to DB using new object - complete check in same step
-        if (isUserAdded) { // If new user insert boolean output true
-            if(!testing) showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "User registered successfully.");
-            //Redirect to Log in
-            // Get the current stage
+        if (isUserAdded) {
+            if (!testing) showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "User registered successfully.");
             Stage currentStage = (Stage) registerButton.getScene().getWindow();
             redirectToLogin(currentStage);
-
-        } else { // If new user insert boolean output false
-            if(!testing) showAlert(Alert.AlertType.ERROR, "Registration Failed!", "There was an error registering the user.");
+        } else {
+            if (!testing) showAlert(Alert.AlertType.ERROR, "Registration Failed!", "There was an error registering the user.");
         }
-
     }
 
-
+    /**
+     * Displays an alert dialog.
+     * @param alertType The type of the alert.
+     * @param title The title of the alert.
+     * @param message The message content of the alert.
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
-        alert.showAndWait();  // This makes it modal and waits for user interaction
+        alert.showAndWait();
     }
 
+    /**
+     * Handles the cancel button click event.
+     * Redirects to the login view.
+     */
     @FXML
     private void handleCancelButtonAction() {
-        // Close the registration window
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         redirectToLogin(stage);
     }
 
+    /**
+     * Redirects to the login view.
+     * @param stage The current stage to be updated with the login view.
+     */
     private void redirectToLogin(Stage stage) {
         try {
-            // Load login.fxml
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/maddev/coozy/login.fxml"));
             Parent root = fxmlLoader.load();
             LoginController controller = fxmlLoader.getController();
-            if(testing) controller.setTesting();
+            if (testing) controller.setTesting();
 
-            // Create a new stage for the login screen
             stage.setTitle("Login Page");
-            stage.setScene(new Scene(root, 600, 400)); // Set the size if needed
-
+            stage.setScene(new Scene(root, 600, 400));
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to load login screen.");

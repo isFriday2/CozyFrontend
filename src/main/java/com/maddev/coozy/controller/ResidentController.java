@@ -1,5 +1,5 @@
 package com.maddev.coozy.controller;
-import com.maddev.coozy.model.ChoreDAO;
+
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
 import javafx.fxml.FXML;
@@ -11,23 +11,14 @@ import javafx.scene.text.Font;
 
 import java.util.List;
 
+/**
+ * Controller class for the resident view.
+ * Handles the display of residents belonging to the same home as the current user.
+ */
 public class ResidentController {
-    private boolean testing=false;
+    private boolean testing = false;
     private UserDAO userDAO;
-
-    public ResidentController() {
-        userDAO =  new UserDAO();
-    }
-
-    public void setTesting(){
-        testing=true;
-        userDAO=new UserDAO(true);
-    }
-
     private User user;
-    public void setUser(User user){
-        this.user = user;
-    }
 
     @FXML
     private ScrollPane scrollPane;
@@ -35,16 +26,46 @@ public class ResidentController {
     @FXML
     private VBox ResidentContainer;
 
+    /**
+     * Constructs a new ResidentController.
+     * Initializes the UserDAO for database operations.
+     */
+    public ResidentController() {
+        userDAO = new UserDAO();
+    }
+
+    /**
+     * Sets the controller to testing mode.
+     * In testing mode, it uses a test database.
+     */
+    public void setTesting() {
+        testing = true;
+        userDAO = new UserDAO(true);
+    }
+
+    /**
+     * Sets the current user for the controller.
+     * @param user The current User object.
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * Initializes the view by displaying residents.
+     */
     @FXML
     public void init() {
         this.displayResidents();
     }
 
+    /**
+     * Displays all residents belonging to the same home as the current user.
+     */
     private void displayResidents() {
         VBox entriesContainer = new VBox(10.0);
         entriesContainer.setStyle("-fx-padding: 15;");
 
-        // Retrieve all users and display only their username and id
         List<User> users = this.userDAO.getAllByHome(user.getHome());
 
         for (User user : users) {
@@ -55,15 +76,18 @@ public class ResidentController {
         this.scrollPane.setContent(entriesContainer);
     }
 
-    // Creates a pane that shows the user's username and ID
+    /**
+     * Creates a pane displaying a resident's information.
+     * @param user The User object representing the resident.
+     * @return A BorderPane containing the resident's information.
+     */
     private BorderPane createResidentEntryPane(User user) {
         BorderPane pane = new BorderPane();
         pane.setStyle("-fx-background-color: #CCE3DE; -fx-background-radius: 25; -fx-padding: 15;");
 
         VBox leftBox = new VBox(5.0);
 
-        // Display user id and username
-        Label idLabel = new Label(user.getNickname()+ "   ID: " + user.getId());
+        Label idLabel = new Label(user.getNickname() + "   ID: " + user.getId());
         idLabel.setFont(Font.font("Arial Rounded MT Bold", 18.0));
         idLabel.setStyle("-fx-text-fill: #6B9080;");
 

@@ -1,23 +1,22 @@
 package com.maddev.coozy.controller;
+
 import com.maddev.coozy.controller.chore.ChoreViewController;
-import com.maddev.coozy.controller.leaderboard.LeaderboardController;
-import com.maddev.coozy.model.ChoreDAO;
 import com.maddev.coozy.model.User;
 import com.maddev.coozy.model.UserDAO;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
+/**
+ * Controller class for the login view.
+ * Handles user authentication and navigation to other views.
+ */
 public class LoginController {
-    private boolean testing=false;
+    private boolean testing = false;
 
     @FXML
     private TextField usernameField;
@@ -31,81 +30,75 @@ public class LoginController {
     @FXML
     private Hyperlink registerLink;
 
-    // Create an instance of UserDAO to interact with the database
     private UserDAO userDAO = new UserDAO();
 
-    public void setTesting(){
-        testing=true;
-        userDAO=new UserDAO(true);
+    /**
+     * Sets the controller to testing mode.
+     * In testing mode, it uses a test database and disables alerts.
+     */
+    public void setTesting() {
+        testing = true;
+        userDAO = new UserDAO(true);
     }
 
-    // Handle button click logic
+    /**
+     * Handles the login button click event.
+     * Authenticates the user and navigates to the home page if successful.
+     */
     @FXML
     private void handleLoginButtonAction() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        // Fetch user from database using username
         User user = userDAO.getByUsername(username);
 
-        // Check user input
         if (user != null) {
-            // Hash password input
             String hashedInputPassword = User.hashPassword(password);
             System.out.println(hashedInputPassword);
-            // Check if input password(hashed) matches db instances
             if (hashedInputPassword.equals(user.getPassword())) {
-                // Successful login
                 try {
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/home-page.fxml"));
-                    Parent homePage = loader.load();
-                    ChoreViewController controller=loader.getController();
-                    controller.setUser(user);
-                    if(testing) controller.setTesting();
-                    controller.init();
-                    Scene scene = new Scene(homePage,1133, 744);
-                    stage.setScene(scene);
+                    navigateToHomePage(user);
                 } catch (IOException e) {
-                    e.printStackTrace(); // This will print the stack trace to help diagnose the problem
-                    showAlert(AlertType.ERROR, "Error", "Failed to load home page.");
+                    e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to load home page.");
                 }
-
-
             } else {
-                // Incorrect Login
-                showAlert(AlertType.ERROR, "Login Failed", "Incorrect Password");
-
+                showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect Password");
             }
         } else {
-            // User not found
-            showAlert(AlertType.ERROR, "Incorrect Details", "User not found.");
-
+            showAlert(Alert.AlertType.ERROR, "Incorrect Details", "User not found.");
         }
     }
 
+    /**
+     * Handles the register link click event.
+     * Navigates to the registration form.
+     */
     @FXML
     private void handleRegisterAction() {
-        // Handle the button click for register account
-        // Open new stage for register form
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/register.fxml"));
             Parent registerForm = loader.load();
-            RegisterController controller=loader.getController();
-            if(testing) controller.setTesting();
+            RegisterController controller = loader.getController();
+            if (testing) controller.setTesting();
             Stage stage = (Stage) registerLink.getScene().getWindow();
             stage.setScene(new Scene(registerForm));
             stage.requestFocus();
             stage.setTitle("Register");
         } catch (IOException e) {
-            e.printStackTrace(); // This will print the stack trace to help diagnose the problem
-            showAlert(AlertType.ERROR, "Error", "Failed to load Registration Form.");
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load Registration Form.");
         }
     }
 
-    // Method for showing alerts using Alert
-    private void showAlert(AlertType type, String title, String message) {
-        if(testing) return;
+    /**
+     * Displays an alert dialog.
+     * @param type The type of the alert.
+     * @param title The title of the alert.
+     * @param message The message content of the alert.
+     */
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        if (testing) return;
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -113,4 +106,20 @@ public class LoginController {
         alert.showAndWait();
     }
 
+    /**
+     * Navigates to the home page.
+     * @param user The authenticated user.
+     * @throws IOException If the home page FXML file cannot be loaded.
+     */
+    private void navigateToHomePage(User user) throws IOException {
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/maddev/coozy/home-page.fxml"));
+        Parent homePage = loader.load();
+        ChoreViewController controller = loader.getController();
+        controller.setUser(user);
+        if (testing) controller.setTesting();
+        controller.init();
+        Scene scene = new Scene(homePage, 1133, 744);
+        stage.setScene(scene);
+    }
 }
