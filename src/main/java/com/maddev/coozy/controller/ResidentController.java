@@ -63,7 +63,7 @@ public class ResidentController {
         VBox leftBox = new VBox(5.0);
 
         // Display user id and username
-        Label idLabel = new Label("ID: " + user.getId());
+        Label idLabel = new Label(user.getNickname()+ "   ID: " + user.getId());
         idLabel.setFont(Font.font("Arial Rounded MT Bold", 18.0));
         idLabel.setStyle("-fx-text-fill: #6B9080;");
 
