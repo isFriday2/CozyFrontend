@@ -1,10 +1,12 @@
 package com.maddev.coozy.model;
 
-// import jBCrypt password hashing library
-// Installed through Maven - required in modeule-info.java
-
 import java.time.LocalDate;
 
+/**
+ * Represents a chore in the system.
+ * This class encapsulates all the information related to a single chore,
+ * including its identifier, associated user, description, reward, and status.
+ */
 public class Chore {
     private int id;
     private int userId;
@@ -17,117 +19,188 @@ public class Chore {
     private boolean completed;
 
     /**
-     * Constructs a new Contact with the specified first name, last name, email, and phone number.
+     * Constructs a new Chore with all fields specified.
      * @param id The identifier and primary key of chore
-     * @param userId The identifier and primary key of user
-     * @param name The name/ title of the chore
-     * @param description The brief description of what's the chore
-     * @param reward The reward in integer of on a chores completion
-     * @param home The identifier of user's home
-     * @param icon The name of the image on the chores entry
-     * @param  dueDate The due date of the chore
-     * @param completed The status of the chore's completion
+     * @param userId The identifier of the user associated with this chore
+     * @param name The name/title of the chore
+     * @param description A brief description of the chore
+     * @param reward The reward (in points) for completing the chore
+     * @param home The identifier of the user's home
+     * @param icon The name of the image associated with the chore
+     * @param dueDate The due date of the chore
+     * @param completed The completion status of the chore
      */
-
-
-    // Constructor including all fields
     public Chore(int id, int userId, String name, String description, int reward,
                  String home, String icon, LocalDate dueDate, boolean completed) {
         this.id = id;
-        this.userId=userId;
-        this.name=name;
-        this.description=description;
-        this.reward=reward;
+        this.userId = userId;
+        this.name = name;
+        this.description = description;
+        this.reward = reward;
         this.home = home;
-        this.icon=icon;
-        this.dueDate=dueDate;
-        this.completed=completed;
+        this.icon = icon;
+        this.dueDate = dueDate;
+        this.completed = completed;
     }
 
-    // Constructor without id for auto incrementing
+    /**
+     * Constructs a new Chore without specifying the id.
+     * This constructor is useful when the id is auto-incremented by the database.
+     * @param userId The identifier of the user associated with this chore
+     * @param name The name/title of the chore
+     * @param description A brief description of the chore
+     * @param reward The reward (in points) for completing the chore
+     * @param home The identifier of the user's home
+     * @param icon The name of the image associated with the chore
+     * @param dueDate The due date of the chore
+     * @param completed The completion status of the chore
+     */
     public Chore(int userId, String name, String description, int reward,
                  String home, String icon, LocalDate dueDate, boolean completed) {
-        this.userId=userId;
-        this.name=name;
-        this.description=description;
-        this.reward=reward;
-        this.home = home;
-        this.icon=icon;
-        this.dueDate=dueDate;
-        this.completed=completed;
+        this(0, userId, name, description, reward, home, icon, dueDate, completed);
     }
 
-    // Create getter functions
+    /**
+     * Gets the chore's identifier.
+     * @return The chore's id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Gets the associated user's identifier.
+     * @return The user's id
+     */
     public int getUserId() {
         return userId;
     }
 
-    public String getName(){
+    /**
+     * Gets the name of the chore.
+     * @return The chore's name
+     */
+    public String getName() {
         return name;
     }
 
-    public String getDescription(){
+    /**
+     * Gets the description of the chore.
+     * @return The chore's description
+     */
+    public String getDescription() {
         return description;
     }
 
-    public int getReward(){
+    /**
+     * Gets the reward for completing the chore.
+     * @return The reward value
+     */
+    public int getReward() {
         return reward;
     }
 
-    public String getHome(){
+    /**
+     * Gets the home identifier associated with the chore.
+     * @return The home identifier
+     */
+    public String getHome() {
         return home;
     }
 
-    public String getIcon(){
+    /**
+     * Gets the icon associated with the chore.
+     * @return The icon name
+     */
+    public String getIcon() {
         return icon;
     }
 
-    public LocalDate getDueDate(){
+    /**
+     * Gets the due date of the chore.
+     * @return The due date
+     */
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public boolean isCompleted(){
+    /**
+     * Checks if the chore is completed.
+     * @return true if the chore is completed, false otherwise
+     */
+    public boolean isCompleted() {
         return completed;
     }
 
-    // Create setter functions
+    /**
+     * Sets the chore's identifier.
+     * @param id The new id to set
+     */
     public void setId(int id) {
-        this.id=id;
+        this.id = id;
     }
 
+    /**
+     * Sets the associated user's identifier.
+     * @param userId The new user id to set
+     */
     public void setUserId(int userId) {
-        this.userId=userId;
+        this.userId = userId;
     }
 
-    public void setName(String name){
-        this.name=name;
+    /**
+     * Sets the name of the chore.
+     * @param name The new name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDescription(String description){
-        this.description=description;
+    /**
+     * Sets the description of the chore.
+     * @param description The new description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setReward(int reward){
-        this.reward=reward;
+    /**
+     * Sets the reward for completing the chore.
+     * @param reward The new reward value to set
+     */
+    public void setReward(int reward) {
+        this.reward = reward;
     }
 
-    public void setHome(String home){
-        this.home=home;
+    /**
+     * Sets the home identifier associated with the chore.
+     * @param home The new home identifier to set
+     */
+    public void setHome(String home) {
+        this.home = home;
     }
 
-    public void setIcon(String icon){
-        this.icon=icon;
+    /**
+     * Sets the icon associated with the chore.
+     * @param icon The new icon name to set
+     */
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public void setDueDate(LocalDate dueDate){
-        this.dueDate=dueDate;
+    /**
+     * Sets the due date of the chore.
+     * @param dueDate The new due date to set
+     */
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public void setCompleted(boolean completed){
-        this.completed=completed;
+    /**
+     * Sets the completion status of the chore.
+     * @param completed The new completion status to set
+     */
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

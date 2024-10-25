@@ -4,33 +4,39 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data Access Object (DAO) for User entities.
+ * This class handles all database operations related to Users,
+ * including CRUD operations and various retrieval methods.
+ */
 public class UserDAO {
-    // Define DB connection
     private Connection connection;
 
-    // Create DB connection instance
+    /**
+     * Constructs a UserDAO and establishes a database connection.
+     * It also ensures that the Users table exists in the database.
+     */
     public UserDAO() {
         connection = DatabaseConnection.getInstance();
         createTable();
     }
 
-    // Creates DB connection for unit tests
-    public UserDAO(boolean test){
-        if(test){
+    /**
+     * Constructs a UserDAO with an option for testing purposes.
+     * @param test If true, uses a test database connection; otherwise, uses the standard connection.
+     */
+    public UserDAO(boolean test) {
+        if (test) {
             connection = TestDatabaseConnection.getInstance();
-            createTable();
-        }else{
+        } else {
             connection = DatabaseConnection.getInstance();
-            createTable();
         }
+        createTable();
     }
 
-    //
-    // Functions for CRUD with database
-    //
-
-    // Create table in db
-    // Will not create table if already exists
+    /**
+     * Creates the Users table in the database if it doesn't already exist.
+     */
     public void createTable() {
         try {
             Statement createTable = connection.createStatement();
@@ -50,19 +56,24 @@ public class UserDAO {
         }
     }
 
-    // Erases all users in the db, use it only with the test db
-    public void resetTable(){
+    /**
+     * Resets the Users table by deleting all entries.
+     * This method should only be used with the test database.
+     */
+    public void resetTable() {
         try {
             Statement createTable = connection.createStatement();
-            createTable.execute(
-                    "DELETE FROM users"
-            );
+            createTable.execute("DELETE FROM users");
         } catch (SQLException ex) {
             System.err.println(ex);
         }
     }
 
-    // Insert new user into db
+    /**
+     * Inserts a new user into the database.
+     * @param user The User object to be inserted.
+     * @return true if the insertion was successful, false otherwise.
+     */
     public boolean insert(User user) {
         try {
             PreparedStatement insertUser = connection.prepareStatement(
@@ -81,7 +92,10 @@ public class UserDAO {
         }
     }
 
-    // Update details of existing user in db
+    /**
+     * Updates an existing user in the database.
+     * @param user The User object with updated information.
+     */
     public void update(User user) {
         try {
             PreparedStatement updateUser = connection.prepareStatement(
@@ -92,14 +106,17 @@ public class UserDAO {
             updateUser.setString(3, user.getNickname());
             updateUser.setString(4, user.getHome());
             updateUser.setString(5, user.getPassword());
-            updateUser.setString(6, user.getUsername());
+            updateUser.setInt(6, user.getId());
             updateUser.execute();
         } catch (SQLException ex) {
             System.err.println(ex);
         }
     }
 
-    // Delete existing user in db
+    /**
+     * Deletes a user from the database.
+     * @param id The ID of the user to be deleted.
+     */
     public void delete(int id) {
         try {
             PreparedStatement deleteUser = connection.prepareStatement("DELETE FROM users WHERE id = ?");
@@ -110,26 +127,24 @@ public class UserDAO {
         }
     }
 
-    //
-    //DB getters
-    //
-
+    /**
+     * Retrieves all users from the database.
+     * @return A List of all User objects in the database.
+     */
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         try {
             Statement getAll = connection.createStatement();
             ResultSet rs = getAll.executeQuery("SELECT * FROM users");
             while (rs.next()) {
-                users.add(
-                        new User(
-                                rs.getInt("id"),
-                                rs.getString("username"),
-                                rs.getString("email"),
-                                rs.getString("nickname"),
-                                rs.getString("home"),
-                                rs.getString("password")
-                        )
-                );
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("nickname"),
+                        rs.getString("home"),
+                        rs.getString("password")
+                ));
             }
         } catch (SQLException ex) {
             System.err.println(ex);
@@ -137,6 +152,11 @@ public class UserDAO {
         return users;
     }
 
+    /**
+     * Retrieves all users from a specific home.
+     * @param home The home identifier to filter users.
+     * @return A List of User objects belonging to the specified home.
+     */
     public List<User> getAllByHome(String home) {
         List<User> users = new ArrayList<>();
         try {
@@ -144,16 +164,14 @@ public class UserDAO {
             getByHome.setString(1, home);
             ResultSet rs = getByHome.executeQuery();
             while (rs.next()) {
-                users.add(
-                        new User(
-                                rs.getInt("id"),
-                                rs.getString("username"),
-                                rs.getString("email"),
-                                rs.getString("nickname"),
-                                rs.getString("home"),
-                                rs.getString("password")
-                        )
-                );
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("nickname"),
+                        rs.getString("home"),
+                        rs.getString("password")
+                ));
             }
         } catch (SQLException ex) {
             System.err.println(ex);
@@ -161,7 +179,11 @@ public class UserDAO {
         return users;
     }
 
-    // Get user by ID
+    /**
+     * Retrieves a user by their ID.
+     * @param id The ID of the user to retrieve.
+     * @return The User object if found, null otherwise.
+     */
     public User getById(int id) {
         try {
             PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
@@ -183,7 +205,11 @@ public class UserDAO {
         return null;
     }
 
-    // Get user by username
+    /**
+     * Retrieves a user by their username.
+     * @param username The username of the user to retrieve.
+     * @return The User object if found, null otherwise.
+     */
     public User getByUsername(String username) {
         try {
             PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
@@ -205,28 +231,24 @@ public class UserDAO {
         return null;
     }
 
-    //
-    // Password Validation with SHA-256
-    //
-
-    // Password Validation - using hashing method for security
+    /**
+     * Validates a user's password.
+     * @param username The username of the user.
+     * @param inputPassword The password to validate.
+     * @return true if the password is valid, false otherwise.
+     */
     public boolean validatePassword(String username, String inputPassword) {
-        User user = getByUsername(username); // Fetch user by username
-
+        User user = getByUsername(username);
         if (user != null) {
-            // Hash the input password using SHA-256
             String hashedInputPassword = User.hashPassword(inputPassword);
-
-            // Compare the hashed input password with the stored hashed password
             return hashedInputPassword.equals(user.getPassword());
         }
-
-        // Return false if the user is not found
         return false;
     }
 
-
-    // Terminate connection function
+    /**
+     * Closes the database connection.
+     */
     public void close() {
         try {
             connection.close();

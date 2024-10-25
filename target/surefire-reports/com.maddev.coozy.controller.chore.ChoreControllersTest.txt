@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.maddev.coozy.controller.chore.ChoreControllersTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.424 s -- in com.maddev.coozy.controller.chore.ChoreControllersTest

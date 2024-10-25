@@ -47,22 +47,41 @@
                   </Label>
                   <VBox prefHeight="315.0" prefWidth="284.0">
                      <children>
-                        <TextField fx:id="nameTextField" alignment="CENTER" prefHeight="26.0" prefWidth="250.0" promptText="Chore title">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
+                        <VBox>
+                           <children>
+                           <Label text="Chore Title">
+                              <VBox.margin>
+                                 <Insets left="40.0" right="40.0" top="30.0" />
+                              </VBox.margin>
+                           </Label>
+                           <TextField fx:id="nameTextField" prefHeight="26.0" prefWidth="250.0" promptText="e.g. Clean the bathroom">
+                              <opaqueInsets>
+                                 <Insets />
+                              </opaqueInsets>
+                              <VBox.margin>
+                                 <Insets left="40.0" right="40.0"  />
+                              </VBox.margin>
+                           </TextField>
+                           </children>
+                        </VBox>
+                        <Label text="Assign to">
                            <VBox.margin>
                               <Insets left="40.0" right="40.0" top="30.0" />
                            </VBox.margin>
-                        </TextField>
+                        </Label>
                         <ChoiceBox fx:id="chooseUsername" prefHeight="26.0" prefWidth="120.0">
                            <VBox.margin>
-                              <Insets left="40.0" right="40.0" top="30.0" />
+                              <Insets left="40.0" right="40.0" />
                            </VBox.margin>
                         </ChoiceBox>
-                        <TextField fx:id="pointsTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="120.0" promptText="Assign points">
+                        <Label text="Assign Points">
                            <VBox.margin>
                               <Insets left="40.0" right="40.0" top="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="pointsTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="120.0" promptText="10">
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0"/>
                            </VBox.margin>
                         </TextField>
                         <MenuButton fx:id="iconMenuButton" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" prefWidth="120.0" text="Choose icon" textFill="#898989">
@@ -102,9 +121,14 @@
                               <Insets left="40.0" right="40.0" top="30.0" />
                            </VBox.margin>
                         </MenuButton>
-                        <DatePicker fx:id="dueDatePicker" prefHeight="26.0" prefWidth="120.0" promptText="due date">
+                        <Label text="Due date">
                            <VBox.margin>
                               <Insets left="40.0" right="40.0" top="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <DatePicker fx:id="dueDatePicker" prefHeight="26.0" prefWidth="120.0" promptText="Select a date">
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0"/>
                            </VBox.margin>
                         </DatePicker>
                      </children>

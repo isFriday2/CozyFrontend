@@ -4,14 +4,29 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Manages test database connections using a singleton pattern.
+ * This class provides a single point of access to the SQLite test database connection.
+ * It is specifically designed for use in test environments.
+ */
 public class TestDatabaseConnection {
     private static Connection instance = null;
     private static final String URL = "jdbc:sqlite:testdatabase.db";
 
+    /**
+     * Private constructor to prevent instantiation.
+     * This enforces the singleton pattern.
+     */
     private TestDatabaseConnection() {
         // Private constructor to prevent instantiation
     }
 
+    /**
+     * Returns a singleton instance of the test database connection.
+     * If the connection doesn't exist, it creates a new one.
+     *
+     * @return The test database Connection instance
+     */
     public static Connection getInstance() {
         if (instance == null) {
             try {
@@ -30,6 +45,10 @@ public class TestDatabaseConnection {
         return instance;
     }
 
+    /**
+     * Closes the test database connection if it exists.
+     * After closing, the connection instance is set to null.
+     */
     public static void closeConnection() {
         if (instance != null) {
             try {

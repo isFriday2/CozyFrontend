@@ -6,6 +6,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
+# GitHub Automation Demo
+
+
 name: Java CI with Maven
 
 on:

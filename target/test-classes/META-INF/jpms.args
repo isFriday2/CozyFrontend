@@ -1,0 +1,4 @@
+--patch-module
+com.maddev.coozy=_
+--add-reads
+com.maddev.coozy=ALL-UNNAMED
